@@ -9,6 +9,7 @@ use jeemce\helpers\WidgetHelper;
  * @var \jeemce\models\Page $searchModel
  */
 
+$this->title = $this->params['pageName'] = "Data Provinsi";
 $this->params['pageName'] = 'Data Provinsi';
 $this->params['breadcrumbs'][] = 'Data Provinsi';
 ?>

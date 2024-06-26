@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+$this->title = $this->params['pageName'] = "Laporan Penduduk";
 ?>
 <div class="site-index">
 
