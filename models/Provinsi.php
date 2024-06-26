@@ -3,18 +3,27 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
 
 /**
- * Provinsi is the model behind the contact form.
+ * This is the model class for table "provinsi".
+ * @property int $id
+ * @property string|null $nilai_kode 
  */
-class Provinsi extends Model
+
+class Provinsi extends \jeemce\models\Model
 {
-    public $name;
-    public $email;
-    public $subject;
-    public $body;
-    public $verifyCode;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'provinsi';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
 
 
     /**
@@ -23,12 +32,8 @@ class Provinsi extends Model
     public function rules()
     {
         return [
-            // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
-            // email has to be a valid email address
-            ['email', 'email'],
-            // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+            // name are required
+            [['nama_provinsi'], 'required'],
         ];
     }
 
@@ -38,28 +43,29 @@ class Provinsi extends Model
     public function attributeLabels()
     {
         return [
+            'id_provinsi' => 'ID',
+            'nama_provinsi' => 'Nama Provinsi',
             'verifyCode' => 'Verification Code',
         ];
     }
 
     /**
-     * Sends an email to the specified email address using the information collected by this model.
-     * @param string $email the target email address
-     * @return bool whether the model passes validation
-     */
-    public function contact($email)
+     * Gets query for [[Provinsi]].
+     *
+     * @return \yii\db\ActiveQuery
+     */ 
+    public function getProvinsi()
     {
-        if ($this->validate()) {
-            Yii::$app->mailer->compose()
-                ->setTo($email)
-                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setReplyTo([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
+        return $this->hasOne(Provinsi::class, ['id' => 'id_provinsi']);
+    }
 
-            return true;
-        }
-        return false;
+    /**
+     * Gets query for [[Provinsis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProvinsis()
+    {
+        return $this->hasMany(Provinsi::class, ['id' => 'id_provinsi']);
     }
 }

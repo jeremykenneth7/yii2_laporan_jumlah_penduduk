@@ -42,14 +42,17 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'provinsi' => 'provinsi/index',
+                'kabupaten' => 'kabupaten/index',
+                'penduduk' => 'penduduk/index',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
