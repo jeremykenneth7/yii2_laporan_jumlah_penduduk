@@ -9,9 +9,9 @@ use jeemce\helpers\WidgetHelper;
  * @var \jeemce\models\Page $searchModel
  */
 
-$this->title = $this->params['pageName'] = "Data Kabupaten di Indonesia";
-$this->params['pageName'] = 'Data Kabupaten';
-$this->params['breadcrumbs'][] = 'Data Kabupaten';
+$this->title = $this->params['pageName'] = "Data Penduduk di Indonesia";
+$this->params['pageName'] = 'Data Penduduk';
+$this->params['breadcrumbs'][] = 'Data Penduduk';
 ?>
 
 <?php \yii\widgets\Pjax::begin(['options' => ['class' => 'card']]) ?>
@@ -29,14 +29,12 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
     ],
     'columns' => [
         ['class' => jeemce\grid\SerialColumn::class],
-        'nama_kabupaten',
-        [
-            'attribute' => 'provinsi.nama_provinsi', 
-            'value' => function ($model) {
-                return $model->provinsi->nama_provinsi;
-            },
-        ],
-
+        'nama',
+        'nik',
+        'tanggal_lahir',
+        'alamat',
+        'jenis_kelamin',
+        'timestamp',
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'buttons' => [

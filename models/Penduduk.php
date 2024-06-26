@@ -5,13 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "kabupaten".
+ * This is the model class for table "penduduk".
+ * @property string|null $id_penduduk
+ * @property string|null $nik
  * @property string|null $id_provinsi
  * @property string|null $id_kabupaten
- * @property string|null $nama_kabupaten 
+ * @property string|null $nama 
  */
 
-class Kabupaten extends \jeemce\models\Model
+class Penduduk extends \jeemce\models\Model
 {
 
     /**
@@ -19,7 +21,7 @@ class Kabupaten extends \jeemce\models\Model
      */
     public static function tableName()
     {
-        return 'kabupaten';
+        return 'penduduk';
     }
 
     /**
@@ -34,8 +36,9 @@ class Kabupaten extends \jeemce\models\Model
     {
         return [
             // name are required
-            [['nama_kabupaten'], 'required'],
-            [['id_kabupaten'], 'number'],
+            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required'],
+            [['nama'], 'string', 'max' => 256],
+            [['nik'], 'string', 'max' => 256],
         ];
     }
 
@@ -45,9 +48,13 @@ class Kabupaten extends \jeemce\models\Model
     public function attributeLabels()
     {
         return [
-            'id_kabupaten' => 'ID',
-            'nama_kabupaten' => 'Nama Kabupaten',
-            'verifyCode' => 'Verification Code',
+            'nama' => 'Nama',
+            'nik' => 'NIK',
+            'jenis_kelamin' => 'Jenis Kelamin',
+            'tanggal_lahir' => 'Tanggal Lahir',
+            'alamat' => 'Alamat',
+            'id_provinsi' => 'Provinsi',
+            'id_kabupaten' => 'Kabupaten',
         ];
     }
 
