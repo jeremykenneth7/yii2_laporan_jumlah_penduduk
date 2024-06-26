@@ -6,8 +6,9 @@ use Yii;
 
 /**
  * This is the model class for table "kabupaten".
- * @property int $id
- * @property string|null $nilai_kode 
+ * @property string|null $id_provinsi
+ * @property string|null $id_kabupaten
+ * @property string|null $nama_kabupaten 
  */
 
 class Kabupaten extends \jeemce\models\Model
@@ -57,5 +58,10 @@ class Kabupaten extends \jeemce\models\Model
     public function getKabupaten()
     {
         return $this->hasOne(Kabupaten::class, ['id' => 'id_kabupaten']);
+    }
+
+    public function getProvinsi()
+    {
+        return $this->hasOne(Provinsi::class, ['id_provinsi' => 'id_provinsi']);
     }
 }

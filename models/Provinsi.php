@@ -6,8 +6,8 @@ use Yii;
 
 /**
  * This is the model class for table "provinsi".
- * @property int $id
- * @property string|null $nilai_kode 
+ * @property string|null $id_provinsi
+ * @property string|null $nama_provinsi 
  */
 
 class Provinsi extends \jeemce\models\Model
@@ -33,7 +33,10 @@ class Provinsi extends \jeemce\models\Model
     {
         return [
             // name are required
-            [['nama_provinsi'], 'required'],
+            [['id_provinsi', 'nama_provinsi'], 'required'],
+            [['id_provinsi'], 'number'],
+            [['nama'], 'string', 'max' => 256],
+            [['id_provinsi'], 'unique'],
         ];
     }
 
@@ -43,9 +46,8 @@ class Provinsi extends \jeemce\models\Model
     public function attributeLabels()
     {
         return [
-            'id_provinsi' => 'ID',
+            'id_provinsi' => 'Kode Provinsi',
             'nama_provinsi' => 'Nama Provinsi',
-            'verifyCode' => 'Verification Code',
         ];
     }
 
@@ -53,7 +55,7 @@ class Provinsi extends \jeemce\models\Model
      * Gets query for [[Provinsi]].
      *
      * @return \yii\db\ActiveQuery
-     */ 
+     */
     public function getProvinsi()
     {
         return $this->hasOne(Provinsi::class, ['id' => 'id_provinsi']);
