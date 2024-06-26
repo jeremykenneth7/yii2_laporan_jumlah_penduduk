@@ -20,6 +20,7 @@ class PendudukController extends Controller
         $searchQuery = Penduduk::find();
 
         $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
+        $dataProvider->pagination->pageSize = 10;
         $dataProvider->sort->defaultOrder = [
             'id_penduduk' => SORT_ASC,
         ];

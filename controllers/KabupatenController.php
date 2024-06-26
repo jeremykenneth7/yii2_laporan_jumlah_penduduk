@@ -20,6 +20,7 @@ class KabupatenController extends Controller
         $searchQuery = Kabupaten::find();
 
         $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
+        $dataProvider->pagination->pageSize = 10;
         $dataProvider->sort->defaultOrder = [
             'id_kabupaten' => SORT_ASC,
         ];

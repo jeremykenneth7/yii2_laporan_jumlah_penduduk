@@ -20,6 +20,7 @@ class ProvinsiController extends Controller
         $searchQuery = Provinsi::find();
 
         $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
+        $dataProvider->pagination->pageSize = 10; 
         $dataProvider->sort->defaultOrder = [
             'id_provinsi' => SORT_ASC,
         ];
