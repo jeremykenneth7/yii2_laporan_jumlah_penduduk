@@ -35,10 +35,14 @@ class Penduduk extends \jeemce\models\Model
     public function rules()
     {
         return [
-            // name are required
-            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required'],
-            [['nama'], 'string', 'max' => 256],
-            [['nik'], 'string', 'max' => 256],
+            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi'], 'required'],
+            [['nama'], 'string', 'max' => 100],
+            [['nik'], 'string', 'max' => 18],
+            [['jenis_kelamin'], 'in', 'range' => ['Laki-laki', 'Perempuan']],
+            [['tanggal_lahir'], 'date', 'format' => 'php:Y-m-d'],
+            [['alamat'], 'string'],
+            [['id_kabupaten', 'id_provinsi'], 'string', 'max' => 8],
+            [['id_penduduk'], 'unique'],
         ];
     }
 
@@ -48,13 +52,15 @@ class Penduduk extends \jeemce\models\Model
     public function attributeLabels()
     {
         return [
+            'id_penduduk' => 'ID Penduduk',
             'nama' => 'Nama',
             'nik' => 'NIK',
             'jenis_kelamin' => 'Jenis Kelamin',
             'tanggal_lahir' => 'Tanggal Lahir',
             'alamat' => 'Alamat',
-            'id_provinsi' => 'Provinsi',
             'id_kabupaten' => 'Kabupaten',
+            'id_provinsi' => 'Provinsi',
+            'timestamp' => 'Timestamp',
         ];
     }
 
@@ -71,5 +77,26 @@ class Penduduk extends \jeemce\models\Model
     public function getProvinsi()
     {
         return $this->hasOne(Provinsi::class, ['id_provinsi' => 'id_provinsi']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->id_penduduk = $this->generateUniqueId();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Generate a unique ID
+     *
+     * @return string
+     */
+    protected function generateUniqueId()
+    {
+        return substr(md5(uniqid(rand(), true)), 0, 8);
     }
 }

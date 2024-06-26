@@ -33,9 +33,10 @@ class Kabupaten extends \jeemce\models\Model
     public function rules()
     {
         return [
-            // name are required
-            [['nama_kabupaten'], 'required'],
-            [['id_kabupaten'], 'number'],
+            [['id_kabupaten', 'id_provinsi', 'nama_kabupaten'], 'required'],
+            [['id_kabupaten'], 'unique'],
+            [['id_kabupaten'], 'number', 'max' => 5],
+            [['nama_kabupaten'], 'string', 'max' => 256],
         ];
     }
 
@@ -45,9 +46,9 @@ class Kabupaten extends \jeemce\models\Model
     public function attributeLabels()
     {
         return [
-            'id_kabupaten' => 'ID',
+            'id_kabupaten' => 'ID Kabupaten',
+            'id_provinsi' => 'ID Provinsi',
             'nama_kabupaten' => 'Nama Kabupaten',
-            'verifyCode' => 'Verification Code',
         ];
     }
 
@@ -64,5 +65,34 @@ class Kabupaten extends \jeemce\models\Model
     public function getProvinsi()
     {
         return $this->hasOne(Provinsi::class, ['id_provinsi' => 'id_provinsi']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->id_kabupaten = $this->generateUniqueId();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Generate a unique ID with 2 digits
+     *
+     * @return string
+     */
+    protected function generateUniqueId()
+    {
+        $maxId = static::find()->max('id_kabupaten');
+
+        if (!$maxId) {
+            $id = 4000;
+        } else {
+            $id = $maxId + 1;
+        }
+
+        return str_pad($id, 4, '0', STR_PAD_LEFT);
     }
 }

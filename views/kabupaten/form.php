@@ -1,14 +1,24 @@
 <?php
 
-use common\models\Provinsi;
-use kartik\form\ActiveForm;
 use yii\helpers\Html;
+use app\models\Provinsi;
+use kartik\form\ActiveForm;
+use common\models\Kabupaten;
 
 /**
  * @var \jeemce\AppView $this
- * @var Provinsi $model
+ * @var Kabupaten $model
  */
+
+$provinsiOptions = Provinsi::find()
+    ->select(['id_provinsi', 'nama_provinsi'])
+    ->orderBy('nama_provinsi')
+    ->asArray()
+    ->all();
+
+$provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi', 'nama_provinsi');
 ?>
+
 
 <div class="modal-header">
     <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
@@ -21,9 +31,11 @@ use yii\helpers\Html;
 ]); ?>
 
 <div class="row">
-    <div class="col-md-6">
-        <?= $form->field($model, 'nama_provinsi')->textInput()->label('Nama Provinsi') ?>
-    </div>
+    <?= $form->field($model, 'id_provinsi')->dropDownList($provinsiOptions, ['prompt' => 'Select Provinsi'])->label('Provinsi') ?>
+</div>
+
+<div class="row">
+    <?= $form->field($model, 'nama_kabupaten')->textInput()->label('Nama Kabupaten') ?>
 </div>
 
 <div class="modal-footer p-0">
