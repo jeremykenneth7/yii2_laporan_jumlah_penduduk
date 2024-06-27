@@ -11,20 +11,20 @@ use yii\widgets\ActiveForm;
  */
 
 $provinsiOptions = Provinsi::find()
-    ->select(['id_provinsi', 'nama_provinsi'])
+    ->select(['nama_provinsi'])
     ->orderBy('nama_provinsi')
     ->asArray()
     ->all();
 
-$provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi', 'nama_provinsi');
+$provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'nama_provinsi', 'nama_provinsi');
 
 $kabupatenOptions = Kabupaten::find()
-    ->select(['id_kabupaten', 'nama_kabupaten'])
+    ->select(['nama_kabupaten'])
     ->orderBy('nama_kabupaten')
     ->asArray()
     ->all();
 
-$kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'id_kabupaten', 'nama_kabupaten');
+$kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'nama_kabupaten', 'nama_kabupaten');
 
 ?>
 
@@ -58,7 +58,7 @@ $kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'id_kabupat
 <div class="ms-auto"></div>
 
 <div class="ms-lg-2">
-    <?= Html::dropDownList('filter[provinsi.nama_provinsi]', $searchModel['filter']['provinsi.nama_provinsi'] ?? null, $provinsiOptions, [
+    <?= Html::dropDownList('filter[a.nama_provinsi]', $searchModel['filter']['a.nama_provinsi'] ?? null, $provinsiOptions, [
         'class' => 'form-select',
         'prompt' => 'Semua Provinsi',
         'onchange' => "$(this).trigger('submit')"
@@ -66,7 +66,7 @@ $kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'id_kabupat
 </div>
 
 <div class="ms-lg-2">
-    <?= Html::dropDownList('filter[kabupaten.nama_kabupaten]', $searchModel['filter']['kabupaten.nama_kabupaten'] ?? null, $kabupatenOptions, [
+    <?= Html::dropDownList('filter[b.nama_kabupaten]', $searchModel['filter']['b.nama_kabupaten'] ?? null, $kabupatenOptions, [
         'class' => 'form-select',
         'prompt' => 'Semua Kabupaten',
         'onchange' => "$(this).trigger('submit')"

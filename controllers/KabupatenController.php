@@ -38,6 +38,7 @@ class KabupatenController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $searchQuery,
         ]);
+        $dataProvider->pagination->pageSize = 10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
