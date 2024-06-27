@@ -3,9 +3,10 @@
 namespace app\controllers;
 
 use Yii;
-use yii\widgets\ActiveForm;
-use jeemce\models\MimikSearch;
 use app\models\Kabupaten;
+use yii\base\DynamicModel;
+use yii\widgets\ActiveForm;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class KabupatenController extends Controller
@@ -15,17 +16,33 @@ class KabupatenController extends Controller
     public function actionIndex()
     {
 
-        $searchModel = new MimikSearch(Kabupaten::class);
+        $searchModel = new DynamicModel(array_merge([
+            'search',
+            'status',
+            'filter' => [],
+        ], Yii::$app->request->queryParams));
 
-        $searchQuery = Kabupaten::find();
+        if (!empty($searchModel->search)) {
+            $searchModel->search = strtolower($searchModel->search);
+        }
 
-        $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
-        $dataProvider->pagination->pageSize = 10;
-        $dataProvider->sort->defaultOrder = [
-            'id_kabupaten' => SORT_ASC,
-        ];
+        $searchQuery = Kabupaten::find()
+            ->joinWith('provinsi a')
+            ->andFilterWhere($searchModel->filter)
+            ->andFilterWhere([
+                'or',
+                ['like', 'LOWER(nama_kabupaten)', $searchModel->search],
+                ['like', 'LOWER(a.nama_provinsi)', $searchModel->search],
+            ]);
 
-        return $this->render('index', get_defined_vars());
+        $dataProvider = new ActiveDataProvider([
+            'query' => $searchQuery,
+        ]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionForm($id_kabupaten = null)

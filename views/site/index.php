@@ -6,42 +6,45 @@ $this->title = $this->params['pageName'] = "Laporan Penduduk";
 ?>
 <div class="site-index">
 
-    <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">Laporan Jumlah Penduduk</h1>
-    </div>
-
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4 mb-3 mt-5">
-                <h2>Data Nama Provinsi</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Data Nama Provinsi &raquo;</a></p>
+        <div class="row mb-5 mt-5">
+            <div class="col text-center">
+                <h2 id="features" class="display-4 mb-4">Laporan Jumlah Penduduk</h2>
+                <p class="lead">Sistem Laporan Data Penduduk, Data Provinsi, dan Data Kabupaten</p>
             </div>
-            <div class="col-lg-4 mb-3 mt-5">
-                <h2>Data Kabupaten</h2>
+        </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Data Kabupaten &raquo;</a></p>
+        <div class="row text-center">
+            <div class="col-lg-4 mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-map-marked-alt fa-3x mb-4 text-primary"></i>
+                        <h2>Data Nama Provinsi</h2>
+                        <p class="card-text">Data nama provinsi yang ada di Indonesia</p>
+                        <a class="btn btn-outline-primary" href="/provinsi/index">Data Nama Provinsi &raquo;</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4 mb-3 mt-5">
-                <h2>Data Penduduk</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Data Penduduk &raquo;</a></p>
+            <div class="col-lg-4 mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-city fa-3x mb-4 text-primary"></i>
+                        <h2>Data Kabupaten</h2>
+                        <p class="card-text">Data dari Kabupaten yang ada di Indonesia.</p>
+                        <a class="btn btn-outline-primary" href="/kabupaten/index">Data Kabupaten &raquo;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-3x mb-4 text-primary"></i>
+                        <h2>Data Penduduk</h2>
+                        <p class="card-text">Data penduduk yang detail dan up-to-date.</p>
+                        <a class="btn btn-outline-primary" href="/penduduk/index">Data Penduduk &raquo;</a>
+                    </div>
+                </div>
             </div>
         </div>
 
