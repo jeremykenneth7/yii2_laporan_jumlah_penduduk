@@ -33,7 +33,7 @@ class Kabupaten extends \jeemce\models\Model
     public function rules()
     {
         return [
-            [['id_kabupaten', 'id_provinsi', 'nama_kabupaten'], 'required'],
+            [['id_provinsi', 'nama_kabupaten'], 'required'],
             [['id_kabupaten'], 'unique'],
             [['id_kabupaten'], 'number', 'max' => 5],
             [['nama_kabupaten'], 'string', 'max' => 256],
@@ -88,11 +88,11 @@ class Kabupaten extends \jeemce\models\Model
         $maxId = static::find()->max('id_kabupaten');
 
         if (!$maxId) {
-            $id = 4000;
+            $id = 10;
         } else {
             $id = $maxId + 1;
         }
 
-        return str_pad($id, 4, '0', STR_PAD_LEFT);
+        return str_pad($id, 2, '0', STR_PAD_LEFT);
     }
 }
