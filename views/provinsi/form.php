@@ -10,6 +10,17 @@ use yii\helpers\Html;
  */
 ?>
 
+<style>
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 15px;
+    }
+</style>
+
+
 <div class="modal-header">
     <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

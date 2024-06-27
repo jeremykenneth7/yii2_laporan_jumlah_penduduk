@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\grid\GridView;
 use jeemce\helpers\WidgetHelper;
 
@@ -32,7 +33,6 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
         'nama_provinsi',
         [
             'class' => \jeemce\grid\ActionColumn::class,
-            'template' => '{form} &nbsp;{delete}',
             'buttons' => [
                 'form' => [
                     'icon' => '<i class="bi bi-pencil"></i>',
@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
                 return $href;
             },
         ],
-
 
     ],
 ]) ?>

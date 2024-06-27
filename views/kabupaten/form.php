@@ -19,6 +19,16 @@ $provinsiOptions = Provinsi::find()
 $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi', 'nama_provinsi');
 ?>
 
+<style>
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 15px;
+    }
+</style>
+
 
 <div class="modal-header">
     <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
