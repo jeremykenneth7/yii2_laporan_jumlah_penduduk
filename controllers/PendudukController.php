@@ -8,6 +8,7 @@ use yii\base\DynamicModel;
 use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\web\Controller;
 
 class PendudukController extends Controller
 {
@@ -15,7 +16,6 @@ class PendudukController extends Controller
 
     public function actionIndex()
     {
-
         $searchModel = new DynamicModel(array_merge([
             'search',
             'status',
@@ -35,8 +35,6 @@ class PendudukController extends Controller
                 ['like', 'LOWER(b.nama_kabupaten)', $searchModel->search],
                 ['like', 'LOWER(a.nama_provinsi)', $searchModel->search]
             ]);
-
-        // dd($rawSql = $searchQuery->createCommand()->rawSql);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $searchQuery,
@@ -86,9 +84,29 @@ class PendudukController extends Controller
 
     public function actionExcel()
     {
-        $template = Yii::getAlias('@app/views/penduduk/penduduk.xlsx');
+        $searchModel = new DynamicModel(array_merge([
+            'search',
+            'status',
+            'filter' => [],
+        ], Yii::$app->request->queryParams));
 
-        $items = Yii::$app->db->createCommand('SELECT * FROM penduduk')->queryAll();
+        if (!empty($searchModel->search)) {
+            $searchModel->search = strtolower($searchModel->search);
+        }
+
+        $searchQuery = Penduduk::find()
+            ->joinWith(['kabupaten b', 'provinsi a'])
+            ->andFilterWhere($searchModel->filter)
+            ->andFilterWhere([
+                'or',
+                ['like', 'LOWER(penduduk.nama)', $searchModel->search],
+                ['like', 'LOWER(b.nama_kabupaten)', $searchModel->search],
+                ['like', 'LOWER(a.nama_provinsi)', $searchModel->search]
+            ]);
+
+        $items = $searchQuery->asArray()->all();
+
+        $template = Yii::getAlias('@app/views/penduduk/penduduk.xlsx');
 
         $alters = [];
 
@@ -112,7 +130,8 @@ class PendudukController extends Controller
             $x++;
             $worksheet->getCell("$x$y")->setValue($item['nama']);
             $x++;
-            $worksheet->getCell("$x$y")->setValue($item['nik']);
+            $worksheet->getStyle("$x$y")->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_TEXT);
+            $worksheet->getCell("$x$y")->setValueExplicit($item['nik'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $x++;
             $worksheet->getCell("$x$y")->setValue($item['tanggal_lahir']);
             $x++;

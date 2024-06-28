@@ -58,8 +58,8 @@ $kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'nama_kabup
 
 <?= Html::a(
     '<i class="bi bi-file-earmark-excel me-1"></i> Export Data',
-    Url::to(['penduduk/excel']),
-    ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-success me-lg-2'],
+    Url::to(array_merge(['penduduk/excel'], Yii::$app->request->queryParams)),
+    ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-success me-lg-2']
 ) ?>
 
 
