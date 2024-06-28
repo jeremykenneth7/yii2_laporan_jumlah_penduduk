@@ -35,6 +35,12 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'nama_provins
     ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-success me-lg-2']
 ) ?>
 
+<?= Html::a(
+    '<i class="bi bi-file-earmark-text me-1"></i> Cetak Data',
+    Url::to(array_merge(['laporan2/html'], Yii::$app->request->queryParams)),
+    ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-primary me-lg-2']
+) ?>
+
 <div class="ms-auto"></div>
 
 <div class="ms-lg-2">

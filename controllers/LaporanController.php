@@ -114,4 +114,39 @@ class LaporanController extends Controller
 
         \app\extras\ExcelHelper::writerResult($spreadsheet, 'data_provinsi.xlsx');
     }
+
+    public function actionHtml()
+    {
+        $searchModel = new DynamicModel(array_merge([
+            'search',
+            'status',
+            'filter' => [],
+        ], Yii::$app->request->queryParams));
+
+        if (!empty($searchModel->search)) {
+            $searchModel->search = strtolower($searchModel->search);
+        }
+
+        $searchQuery = Provinsi::find()
+            ->select(['provinsi.*', 'COUNT(a.id_penduduk) AS jumlah_penduduk'])
+            ->joinWith('penduduk a')
+            ->groupBy('provinsi.id_provinsi')
+            ->andFilterWhere($searchModel->filter)
+            ->andFilterWhere([
+                'or',
+                ['like', 'LOWER(provinsi.nama_provinsi)', $searchModel->search],
+            ]);
+
+        $items = $searchQuery->asArray()->all();
+
+        $htmlContent = $this->renderPartial('cetak', [
+            'items' => $items,
+        ]);
+
+        header('Content-Type: text/html; charset=utf-8');
+        header('Content-Disposition: attachment; filename="data_provinsi.html"');
+
+        echo $htmlContent;
+        exit;
+    }
 }

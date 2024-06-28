@@ -143,4 +143,55 @@ class Laporan2Controller extends Controller
 
         \app\extras\ExcelHelper::writerResult($spreadsheet, 'data_provinsi.xlsx');
     }
+
+
+    public function actionHtml()
+    {
+        $searchModel = new DynamicModel(array_merge([
+            'search',
+            'status',
+            'filter' => [],
+        ], Yii::$app->request->queryParams));
+
+        if (!empty($searchModel->search)) {
+            $searchModel->search = strtolower($searchModel->search);
+        }
+
+        $searchQuery = Kabupaten::find()
+            ->select([
+                'kabupaten.*',
+                'provinsi.nama_provinsi',
+                'COUNT(penduduk.id_penduduk) AS jumlah_penduduk'
+            ])
+            ->leftJoin('provinsi', 'kabupaten.id_provinsi = provinsi.id_provinsi')
+            ->leftJoin('penduduk', 'kabupaten.id_kabupaten = penduduk.id_kabupaten')
+            ->groupBy(['kabupaten.id_kabupaten', 'provinsi.id_provinsi']);
+
+        $provinsiFilter = Yii::$app->request->get('filter')['nama_provinsi'] ?? null;
+        if ($provinsiFilter !== null) {
+            $searchQuery->andFilterWhere(['provinsi.nama_provinsi' => $provinsiFilter]);
+        }
+
+        if (!empty($searchModel->search)) {
+            $searchQuery->andFilterWhere([
+                'or',
+                ['like', 'LOWER(kabupaten.nama_kabupaten)', strtolower($searchModel->search)],
+                ['like', 'LOWER(provinsi.nama_provinsi)', strtolower($searchModel->search)],
+            ]);
+        }
+
+        // dd($searchQuery); 
+
+        $items = $searchQuery->asArray()->all();
+
+        $htmlContent = $this->renderPartial('cetak', [
+            'items' => $items,
+        ]);
+
+        header('Content-Type: text/html; charset=utf-8');
+        header('Content-Disposition: attachment; filename="data_kabupaten.html"');
+
+        echo $htmlContent;
+        exit;
+    }
 }
