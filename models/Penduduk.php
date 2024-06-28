@@ -71,7 +71,7 @@ class Penduduk extends \jeemce\models\Model
      */
     public function getKabupaten()
     {
-        return $this->hasOne(Kabupaten::class, ['id' => 'id_kabupaten']);
+        return $this->hasOne(Kabupaten::class, ['id_kabupaten' => 'id_kabupaten']);
     }
 
     public function getProvinsi()

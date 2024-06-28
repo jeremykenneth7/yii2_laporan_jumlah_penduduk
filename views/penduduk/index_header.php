@@ -7,11 +7,11 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var \jeemce\AppView $this
- * @var Penduduk $searchModel
+ * @var DynamicModel $searchModel
  */
 
 $provinsiOptions = Provinsi::find()
-    ->select(['nama_provinsi'])
+    ->select(['id_provinsi', 'nama_provinsi'])
     ->orderBy('nama_provinsi')
     ->asArray()
     ->all();
@@ -19,7 +19,7 @@ $provinsiOptions = Provinsi::find()
 $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'nama_provinsi', 'nama_provinsi');
 
 $kabupatenOptions = Kabupaten::find()
-    ->select(['nama_kabupaten'])
+    ->select(['id_kabupaten', 'nama_kabupaten'])
     ->orderBy('nama_kabupaten')
     ->asArray()
     ->all();
@@ -37,8 +37,6 @@ $kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'nama_kabup
         'class' => 'card-header d-flex',
     ],
 ]) ?>
-
-
 
 <div class="me-lg-2">
     <?= Html::a('<i class="bi bi-plus me-1"></i>Tambah', ['form'], [

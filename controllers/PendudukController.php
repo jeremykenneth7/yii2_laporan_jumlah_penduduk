@@ -3,9 +3,10 @@
 namespace app\controllers;
 
 use Yii;
-use yii\widgets\ActiveForm;
-use jeemce\models\MimikSearch;
 use app\models\Penduduk;
+use yii\base\DynamicModel;
+use yii\widgets\ActiveForm;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class PendudukController extends Controller
@@ -15,17 +16,37 @@ class PendudukController extends Controller
     public function actionIndex()
     {
 
-        $searchModel = new MimikSearch(Penduduk::class);
+        $searchModel = new DynamicModel(array_merge([
+            'search',
+            'status',
+            'filter' => [],
+        ], Yii::$app->request->queryParams));
 
-        $searchQuery = Penduduk::find();
+        if (!empty($searchModel->search)) {
+            $searchModel->search = strtolower($searchModel->search);
+        }
 
-        $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
+        $searchQuery = Penduduk::find()
+            ->joinWith(['kabupaten b', 'provinsi a'])
+            ->andFilterWhere($searchModel->filter)
+            ->andFilterWhere([
+                'or',
+                ['like', 'LOWER(penduduk.nama)', $searchModel->search],
+                ['like', 'LOWER(b.nama_kabupaten)', $searchModel->search],
+                ['like', 'LOWER(a.nama_provinsi)', $searchModel->search]
+            ]);
+
+        // dd($rawSql = $searchQuery->createCommand()->rawSql);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $searchQuery,
+        ]);
         $dataProvider->pagination->pageSize = 10;
-        $dataProvider->sort->defaultOrder = [
-            'id_penduduk' => SORT_ASC,
-        ];
 
-        return $this->render('index', get_defined_vars());
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionForm($id_penduduk = null)

@@ -35,6 +35,8 @@ class KabupatenController extends Controller
                 ['like', 'LOWER(a.nama_provinsi)', $searchModel->search],
             ]);
 
+        // dd($rawSql = $searchQuery->createCommand()->rawSql);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $searchQuery,
         ]);
