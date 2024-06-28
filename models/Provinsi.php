@@ -12,6 +12,7 @@ use Yii;
  */
 class Provinsi extends \jeemce\models\Model
 {
+    public $jumlah_penduduk;
     /**
      * {@inheritdoc}
      */
@@ -74,5 +75,10 @@ class Provinsi extends \jeemce\models\Model
         }
 
         return str_pad($id, 2, '0', STR_PAD_LEFT); 
+    }
+
+    public function getPenduduk()
+    {
+        return $this->hasMany(Penduduk::class, ['id_provinsi' => 'id_provinsi']);
     }
 }

@@ -34,7 +34,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <header id="header">
         <?php
         NavBar::begin([
-            'brandLabel' => Yii::$app->params['appName'], 
+            'brandLabel' => Yii::$app->params['appName'],
             'brandUrl' => Yii::$app->homeUrl,
             'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
         ]);
@@ -44,6 +44,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 ['label' => 'Provinsi', 'url' => ['/provinsi/index']],
                 ['label' => 'Kabupaten', 'url' => ['/kabupaten/index']],
                 ['label' => 'Penduduk', 'url' => ['/penduduk/index']],
+                ['label' => 'Laporan Provinsi', 'url' => ['/laporan/index']],
+                ['label' => 'Laporan Kabupaten', 'url' => ['/laporan2/index']],
             ]
         ]);
         NavBar::end();

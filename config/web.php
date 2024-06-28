@@ -50,6 +50,8 @@ $config = [
                 'provinsi' => 'provinsi/index',
                 'kabupaten' => 'kabupaten/index',
                 'penduduk' => 'penduduk/index',
+                'laporan' => 'laporan/index',
+                'laporan2' => 'laporan2/index',
             ],
         ],
 
