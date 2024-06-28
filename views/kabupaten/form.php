@@ -21,18 +21,28 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi'
 
 <style>
     .modal-body {
-        padding: 20px;
+        padding: 40px;
+        text-align: center;
+        /* Center align content */
     }
 
     .modal-footer {
         padding: 15px;
     }
+
+    .modal-header {
+        padding: 40px;
+    }
+
+    .modal-footer .btn {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 </style>
 
 
-<div class="modal-header">
-    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-header justify-content-center">
+    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form Input Nama Kabupaten' ?></h5>
 </div>
 
 <?php $form = ActiveForm::begin([
@@ -41,16 +51,20 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi'
 ]); ?>
 
 <div class="row">
-    <?= $form->field($model, 'id_provinsi')->dropDownList($provinsiOptions, ['prompt' => 'Select Provinsi'])->label('Provinsi') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'id_provinsi')->dropDownList($provinsiOptions, ['prompt' => 'Select Provinsi'])->label('Provinsi') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'nama_kabupaten')->textInput()->label('Nama Kabupaten') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'nama_kabupaten')->textInput()->label('Nama Kabupaten') ?>
+    </div>
 </div>
 
-<div class="modal-footer p-0">
-    <?= Html::resetButton('Batal', ['form', 'class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
-    <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
-</div>
+    <div class="modal-footer justify-content-center">
+        <?= Html::resetButton('Batal', ['form', 'class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
+        <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
+    </div>
 
-<?php ActiveForm::end() ?>
+    <?php ActiveForm::end() ?>

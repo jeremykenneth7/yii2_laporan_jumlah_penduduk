@@ -12,18 +12,27 @@ use yii\helpers\Html;
 
 <style>
     .modal-body {
-        padding: 20px;
+        padding: 40px;
+        text-align: center;
+        /* Center align content */
     }
 
     .modal-footer {
         padding: 15px;
     }
+
+    .modal-header {
+        padding: 40px;
+    }
+
+    .modal-footer .btn {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 </style>
 
-
-<div class="modal-header">
-    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-header justify-content-center">
+    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form Input Nama Provinsi' ?></h5>
 </div>
 
 <?php $form = ActiveForm::begin([
@@ -32,12 +41,12 @@ use yii\helpers\Html;
 ]); ?>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 offset-md-3">
         <?= $form->field($model, 'nama_provinsi')->textInput()->label('Nama Provinsi') ?>
     </div>
 </div>
 
-<div class="modal-footer p-0">
+<div class="modal-footer justify-content-center">
     <?= Html::resetButton('Batal', ['form', 'class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
     <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
 </div>

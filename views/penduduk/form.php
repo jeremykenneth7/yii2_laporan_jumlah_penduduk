@@ -33,17 +33,28 @@ foreach ($kabupatenOptions as $kabupaten) {
 
 <style>
     .modal-body {
-        padding: 20px;
+        padding: 40px;
+        text-align: center;
+        /* Center align content */
     }
 
     .modal-footer {
         padding: 15px;
     }
+
+    .modal-header {
+        padding: 40px;
+    }
+
+    .modal-footer .btn {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 40px;
+    }
 </style>
 
-<div class="modal-header">
-    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form' ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-header justify-content-center">
+    <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form Input Nama Penduduk' ?></h5>
 </div>
 
 <?php $form = ActiveForm::begin([
@@ -52,38 +63,52 @@ foreach ($kabupatenOptions as $kabupaten) {
 ]); ?>
 
 <div class="row">
-    <?= $form->field($model, 'nama')->textInput()->label('Nama') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'nama')->textInput()->label('Nama') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'nik')->textInput()->label('NIK') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'nik')->textInput()->label('NIK') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Laki-laki' => 'Laki-laki', 'Perempuan' => 'Perempuan'])->label('Jenis Kelamin') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Laki-laki' => 'Laki-laki', 'Perempuan' => 'Perempuan'])->label('Jenis Kelamin') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'tanggal_lahir')->input('date')->label('Tanggal Lahir') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'tanggal_lahir')->input('date')->label('Tanggal Lahir') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'alamat')->textarea(['id' => 'alamat-field'])->label('Alamat') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'alamat')->textarea(['id' => 'alamat-field'])->label('Alamat') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'id_provinsi')->dropDownList($provinsiOptions, [
-        'prompt' => 'Select Provinsi',
-        'id' => 'provinsi-field',
-        'onchange' => 'updateKabupatenOptions()'
-    ])->label('Provinsi') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'id_provinsi')->dropDownList($provinsiOptions, [
+            'prompt' => 'Select Provinsi',
+            'id' => 'provinsi-field',
+            'onchange' => 'updateKabupatenOptions()'
+        ])->label('Provinsi') ?>
+    </div>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'id_kabupaten')->dropDownList([], ['prompt' => 'Select Kabupaten', 'id' => 'kabupaten-field'])->label('Kabupaten') ?>
+    <div class="col-md-6 offset-md-3">
+        <?= $form->field($model, 'id_kabupaten')->dropDownList([], ['prompt' => 'Select Kabupaten', 'id' => 'kabupaten-field'])->label('Kabupaten') ?>
+    </div>
 </div>
 
-<div class="modal-footer p-0">
+<div class="modal-footer justify-content-center">
     <?= Html::resetButton('Batal', ['class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
     <?= Html::submitButton('Simpan', ['class' => 'btn btn-primary']) ?>
 </div>
