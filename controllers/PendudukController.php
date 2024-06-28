@@ -83,4 +83,50 @@ class PendudukController extends Controller
         if (($model = Penduduk::findOne($params))) return $model;
         throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
     }
+
+    public function actionExcel()
+    {
+        $template = Yii::getAlias('@app/views/penduduk/penduduk.xlsx');
+
+        $items = Yii::$app->db->createCommand('SELECT * FROM penduduk')->queryAll();
+
+        $alters = [];
+
+        $spreadsheet = \app\extras\ExcelHelper::sheetLoader($template);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        $ymin = 6;
+        $xmin = 'A';
+        $xmax = 'G';
+
+        \app\extras\ExcelHelper::sheetAlter($worksheet, $alters, 1, $ymin, $xmin, $xmax);
+
+        $style = $worksheet->getStyle("{$xmin}9")->exportArray();
+        $y = $ymin;
+        $nomor = 1;
+
+        foreach ($items as $item) {
+            $x = $xmin;
+
+            $worksheet->getCell("$x$y")->setValue($nomor);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['nama']);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['nik']);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['tanggal_lahir']);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['alamat']);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['jenis_kelamin']);
+            $x++;
+            $worksheet->getCell("$x$y")->setValue($item['timestamp']);
+            $x++;
+
+            $nomor++;
+            $y++;
+        }
+
+        \app\extras\ExcelHelper::writerResult($spreadsheet, 'data_penduduk.xlsx');
+    }
 }

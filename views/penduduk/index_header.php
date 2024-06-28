@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\Provinsi;
 use app\models\Kabupaten;
@@ -54,6 +55,13 @@ $kabupatenOptions = \yii\helpers\ArrayHelper::map($kabupatenOptions, 'nama_kabup
 ]) ?>
 
 <div class="ms-auto"></div>
+
+<?= Html::a(
+    '<i class="bi bi-file-earmark-excel me-1"></i> Export Data',
+    Url::to(['penduduk/excel']),
+    ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-success me-lg-2'],
+) ?>
+
 
 <div class="ms-lg-2">
     <?= Html::dropDownList('filter[a.nama_provinsi]', $searchModel['filter']['a.nama_provinsi'] ?? null, $provinsiOptions, [
