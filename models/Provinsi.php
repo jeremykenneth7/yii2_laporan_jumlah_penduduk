@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Kabupaten;
 
 /**
  * This is the model class for table "provinsi".
@@ -13,6 +14,7 @@ use Yii;
 class Provinsi extends \jeemce\models\Model
 {
     public $jumlah_penduduk;
+    public $nama_kabupaten;
     /**
      * {@inheritdoc}
      */
@@ -74,7 +76,12 @@ class Provinsi extends \jeemce\models\Model
             $id = $maxId + 1;
         }
 
-        return str_pad($id, 2, '0', STR_PAD_LEFT); 
+        return str_pad($id, 2, '0', STR_PAD_LEFT);
+    }
+
+    public function getKabupaten()
+    {
+        return $this->hasMany(Kabupaten::class, ['id_provinsi' => 'id_provinsi']);
     }
 
     public function getPenduduk()

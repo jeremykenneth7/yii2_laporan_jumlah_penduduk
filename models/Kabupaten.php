@@ -13,7 +13,7 @@ use Yii;
 
 class Kabupaten extends \jeemce\models\Model
 {
-
+    public $jumlah_penduduk;
     /**
      * {@inheritdoc}
      */
@@ -67,6 +67,7 @@ class Kabupaten extends \jeemce\models\Model
         return $this->hasOne(Provinsi::class, ['id_provinsi' => 'id_provinsi']);
     }
 
+
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -94,5 +95,10 @@ class Kabupaten extends \jeemce\models\Model
         }
 
         return str_pad($id, 2, '0', STR_PAD_LEFT);
+    }
+
+    public function getPenduduk()
+    {
+        return $this->hasMany(Penduduk::class, ['id_provinsi' => 'id_provinsi']);
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
-use app\models\Provinsi;
+use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\Provinsi;
 use yii\widgets\ActiveForm;
 
 /**
  * @var \jeemce\AppView $this
- * @var Kabupaten $searchModel
+ * @var Provinsi $searchModel
  */
 
 $provinsiOptions = Provinsi::find()
@@ -28,26 +29,16 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'nama_provins
     ],
 ]) ?>
 
-
-<div class="me-lg-2">
-    <?= Html::a('<i class="bi bi-plus me-1"></i>Tambah', ['form'], [
-        'data-pjax' => 0,
-        'onclick' => 'modalFormAjax(this,event)',
-        'class' => 'btn btn-info d-block',
-    ]) ?>
-</div>
-
-<?= Html::a('<i class="bi bi-trash me-1"></i>Hapus', ['delete-all'], [
-    'id' => 'btn-delete-all',
-    'class' => 'btn btn-danger ms-2 visually-hidden',
-    'data' => ['pjax' => 0, 'manual-tbody' => ""],
-    'onclick' => 'deleteAllConfirm (this,event)'
-]) ?>
+<?= Html::a(
+    '<i class="bi bi-file-earmark-excel me-1"></i> Export Data',
+    Url::to(array_merge(['laporan2/excel'], Yii::$app->request->queryParams)),
+    ['target' => '_blank', 'data-pjax' => 0, 'class' => 'btn btn-success me-lg-2']
+) ?>
 
 <div class="ms-auto"></div>
 
 <div class="ms-lg-2">
-    <?= Html::dropDownList('filter[a.nama_provinsi]', $searchModel->filter['a.nama_provinsi'] ?? null, $provinsiOptions, [
+    <?= Html::dropDownList('filter[nama_provinsi]', $searchModel->filter['nama_provinsi'] ?? null, $provinsiOptions, [
         'class' => 'form-select',
         'prompt' => 'Semua Provinsi',
         'onchange' => "$(this.form).trigger('submit')",

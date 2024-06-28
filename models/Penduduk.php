@@ -100,4 +100,5 @@ class Penduduk extends \jeemce\models\Model
     {
         return substr(md5(uniqid(rand(), true)), 0, 8);
     }
+    
 }

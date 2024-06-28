@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\grid\GridView;
 use jeemce\helpers\WidgetHelper;
 
@@ -9,9 +10,9 @@ use jeemce\helpers\WidgetHelper;
  * @var \jeemce\models\Page $searchModel
  */
 
-$this->title = $this->params['pageName'] = "Data Kabupaten";
-$this->params['pageName'] = 'Data Kabupaten';
-$this->params['breadcrumbs'][] = 'Data Kabupaten';
+$this->title = $this->params['pageName'] = "Laporan Provinsi";
+$this->params['pageName'] = 'Laporan Provinsi';
+$this->params['breadcrumbs'][] = 'Laporan Provinsi';
 ?>
 
 <?php \yii\widgets\Pjax::begin(['options' => ['class' => 'card']]) ?>
@@ -28,33 +29,19 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
         'options' => ['class' => 'pagination d-none'],
     ],
     'columns' => [
-        ['class' => jeemce\grid\SerialColumn::class],
-        'nama_kabupaten',
         [
-            'attribute' => 'provinsi.nama_provinsi', 
+            'attribute' => 'nama_provinsi',
             'value' => function ($model) {
                 return $model->provinsi->nama_provinsi;
             },
         ],
-
+        'nama_kabupaten',
         [
-            'class' => \jeemce\grid\ActionColumn::class,
-            'buttons' => [
-                'form' => [
-                    'icon' => '<i class="bi bi-pencil"></i>',
-                    'options' => ['class' => 'text-dark fs-3', 'onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
-                ],
-            ],
-            'urlCreator' => function ($action, $model) {
-                $href = Url::current([$action, 'id' => $model->id_kabupaten]);
-                if ($action === 'delete') {
-                    $href = Url::current([$action, 'id' => $model->id_kabupaten]);
-                }
-                return $href;
+            'label' => 'Jumlah Penduduk',
+            'value' => function ($model) {
+                return $model->jumlah_penduduk;
             },
         ],
-
-
     ],
 ]) ?>
 
