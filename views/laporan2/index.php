@@ -10,9 +10,9 @@ use jeemce\helpers\WidgetHelper;
  * @var \jeemce\models\Page $searchModel
  */
 
-$this->title = $this->params['pageName'] = "Laporan Provinsi";
-$this->params['pageName'] = 'Laporan Provinsi';
-$this->params['breadcrumbs'][] = 'Laporan Provinsi';
+$this->title = $this->params['pageName'] = "Laporan Kabupaten";
+$this->params['pageName'] = 'Laporan Kabupaten';
+$this->params['breadcrumbs'][] = 'Laporan Kabupaten';
 ?>
 
 <?php \yii\widgets\Pjax::begin(['options' => ['class' => 'card']]) ?>

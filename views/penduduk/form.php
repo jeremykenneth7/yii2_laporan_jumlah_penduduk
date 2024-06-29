@@ -109,7 +109,7 @@ foreach ($kabupatenOptions as $kabupaten) {
 </div>
 
 <div class="modal-footer justify-content-center">
-    <?= Html::resetButton('Batal', ['class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
+    <?= Html::button('Batal', ['class' => 'btn btn-secondary', 'onclick' => 'history.back();']) ?>
     <?= Html::submitButton('Simpan', ['class' => 'btn btn-primary']) ?>
 </div>
 
@@ -145,7 +145,7 @@ $script = <<<JS
         var selectedKabupaten = kabupatenField.options[kabupatenField.selectedIndex].text;
         
         if (provinsiField.value && kabupatenField.value) {
-            alamatField.value += "\\n" + selectedProvinsi + ", " + selectedKabupaten;
+            alamatField.value += ", "+ selectedProvinsi + ", " + selectedKabupaten;
         }
     });
 

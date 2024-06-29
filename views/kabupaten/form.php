@@ -62,9 +62,9 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi'
     </div>
 </div>
 
-    <div class="modal-footer justify-content-center">
-        <?= Html::resetButton('Batal', ['form', 'class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
-        <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
-    </div>
+<div class="modal-footer justify-content-center">
+    <?= Html::button('Batal', ['class' => 'btn btn-secondary', 'onclick' => 'history.back();']) ?>
+    <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
+</div>
 
-    <?php ActiveForm::end() ?>
+<?php ActiveForm::end() ?>

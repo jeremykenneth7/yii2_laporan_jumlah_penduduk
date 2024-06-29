@@ -15,6 +15,7 @@ $this->params['pageName'] = 'Data Provinsi';
 $this->params['breadcrumbs'][] = 'Data Provinsi';
 ?>
 
+
 <?php \yii\widgets\Pjax::begin(['options' => ['class' => 'card']]) ?>
 
 <?= $this->render('index_header', [
@@ -33,12 +34,17 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
         'nama_provinsi',
         [
             'class' => \jeemce\grid\ActionColumn::class,
+            'template' => '{form} {delete}', 
             'buttons' => [
-                'form' => [
-                    'icon' => '<i class="bi bi-pencil"></i>',
-                    'options' => ['class' => 'text-dark fs-3', 'onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
-                ],
+                'form' => function ($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['form', 'id' => $model->id_provinsi], [
+                        'title' => 'Edit',
+                        'data-pjax' => '0',
+                        'class' => 'btn btn-default', 
+                    ]);
+                },
             ],
+
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_provinsi]);
                 if ($action === 'delete') {

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\grid\GridView;
 use jeemce\helpers\WidgetHelper;
 
@@ -37,16 +38,20 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
         'timestamp',
         [
             'class' => \jeemce\grid\ActionColumn::class,
+            'template' => '{form} {delete}',
             'buttons' => [
-                'form' => [
-                    'icon' => '<i class="bi bi-pencil"></i>',
-                    'options' => ['class' => 'text-dark fs-3', 'onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
-                ],
+                'form' => function ($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['form', 'id' => $model->id_penduduk], [
+                        'title' => 'Edit',
+                        'data-pjax' => '0',
+                        'class' => 'btn btn-default',
+                    ]);
+                },
             ],
             'urlCreator' => function ($action, $model) {
-                $href = Url::current([$action, 'id' => $model->id_kabupaten]);
+                $href = Url::current([$action, 'id' => $model->id_penduduk]);
                 if ($action === 'delete') {
-                    $href = Url::current([$action, 'id' => $model->id_kabupaten]);
+                    $href = Url::current([$action, 'id' => $model->id_penduduk]);
                 }
                 return $href;
             },

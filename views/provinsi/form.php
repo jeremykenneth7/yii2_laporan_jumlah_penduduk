@@ -47,7 +47,7 @@ use yii\helpers\Html;
 </div>
 
 <div class="modal-footer justify-content-center">
-    <?= Html::resetButton('Batal', ['form', 'class' => 'btn btn-secondary', 'data-bs-dismiss' => "modal"]) ?>
+    <?= Html::button('Batal', ['class' => 'btn btn-secondary', 'onclick' => 'history.back();']) ?>
     <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
 </div>
 
