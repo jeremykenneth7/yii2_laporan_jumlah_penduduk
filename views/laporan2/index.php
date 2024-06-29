@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = 'Laporan Kabupaten';
         'options' => ['class' => 'pagination d-none'],
     ],
     'columns' => [
+        ['class' => jeemce\grid\SerialColumn::class],
         [
             'attribute' => 'nama_provinsi',
             'value' => function ($model) {
