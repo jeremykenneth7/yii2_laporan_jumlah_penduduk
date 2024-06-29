@@ -39,17 +39,11 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'template' => '{form} {delete}',
-            'buttons' => [
-                'form' => function ($url, $model, $key) {
-                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['form', 'id' => $model->id_penduduk], [
-                        'title' => 'Edit',
-                        'data-pjax' => '0',
-                        'class' => 'btn btn-default',
-                    ]);
-                },
-            ],
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_penduduk]);
+                if ($action === 'form') {
+                    return Url::to(['form', 'id_penduduk' => $model->id_penduduk]);
+                }
                 if ($action === 'delete') {
                     $href = Url::current([$action, 'id' => $model->id_penduduk]);
                 }
