@@ -40,7 +40,6 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi'
     }
 </style>
 
-
 <div class="modal-header justify-content-center">
     <h5 class="modal-title"><?= $this->params['pageName'] ?? 'Form Input Nama Kabupaten' ?></h5>
 </div>

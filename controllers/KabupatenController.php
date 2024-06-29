@@ -50,26 +50,28 @@ class KabupatenController extends Controller
 
     public function actionForm($id_kabupaten = null)
     {
-        if (isset($id_kabupaten)) {
+        if ($id_kabupaten !== null) {
             $model = $this->findModel(['id_kabupaten' => $id_kabupaten]);
+            if (!$model) {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         } else {
-            $model = new Kabupaten;
+            $model = new Kabupaten();
         }
 
-        if ($this->request->isPost) {
-            $model->load($this->request->post());
-
-            if ($this->request->isAjax) {
-                return $this->asJson(ActiveForm::validate($model));
-            }
-
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->save()) {
                 return $this->redirect(['index']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Failed to save Kabupaten.');
             }
         }
 
-        return $this->renderAjax('form', get_defined_vars());
+        return $this->renderAjax('form', [
+            'model' => $model,
+        ]);
     }
+
 
     public function actionView($id_kabupaten)
     {

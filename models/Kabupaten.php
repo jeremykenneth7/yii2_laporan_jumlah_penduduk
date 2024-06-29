@@ -35,7 +35,7 @@ class Kabupaten extends \jeemce\models\Model
         return [
             [['id_provinsi', 'nama_kabupaten'], 'required'],
             [['id_kabupaten'], 'unique'],
-            [['id_kabupaten'], 'number', 'max' => 5],
+            [['id_kabupaten'], 'string', 'max' => 5],
             [['nama_kabupaten'], 'string', 'max' => 256],
         ];
     }
