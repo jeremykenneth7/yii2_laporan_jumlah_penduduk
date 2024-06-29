@@ -40,6 +40,8 @@ use yii\helpers\Html;
     'options' => ['autocomplete' => 'off', 'class' => 'modal-body'],
 ]); ?>
 
+<?= $form->field($model, 'id_provinsi')->hiddenInput()->label(false) ?>
+
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <?= $form->field($model, 'nama_provinsi')->textInput()->label('Nama Provinsi') ?>
@@ -48,7 +50,7 @@ use yii\helpers\Html;
 
 <div class="modal-footer justify-content-center">
     <?= Html::button('Batal', ['class' => 'btn btn-secondary', 'onclick' => 'history.back();']) ?>
-    <?= Html::submitButton('Simpan', ['form', 'class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton('Simpan', ['class' => 'btn btn-primary']) ?>
 </div>
 
 <?php ActiveForm::end() ?>

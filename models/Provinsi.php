@@ -30,7 +30,7 @@ class Provinsi extends \jeemce\models\Model
     {
         return [
             [['nama_provinsi'], 'required'],
-            [['id_provinsi'], 'number', 'max' => 3],
+            [['id_provinsi'], 'string', 'max' => 3],
             [['nama_provinsi'], 'string', 'max' => 256],
             [['id_provinsi'], 'unique'],
         ];
@@ -60,6 +60,7 @@ class Provinsi extends \jeemce\models\Model
         }
         return false;
     }
+
 
     /**
      * Generate a unique ID with 2 digits

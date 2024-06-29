@@ -34,19 +34,12 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
         'nama_provinsi',
         [
             'class' => \jeemce\grid\ActionColumn::class,
-            'template' => '{form} {delete}', 
-            'buttons' => [
-                'form' => function ($url, $model, $key) {
-                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['form', 'id' => $model->id_provinsi], [
-                        'title' => 'Edit',
-                        'data-pjax' => '0',
-                        'class' => 'btn btn-default', 
-                    ]);
-                },
-            ],
-
+            'template' => '{form} {delete}',
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_provinsi]);
+                if ($action === 'form') {
+                    return Url::to(['form', 'id_provinsi' => $model->id_provinsi]);
+                }
                 if ($action === 'delete') {
                     $href = Url::current([$action, 'id' => $model->id_provinsi]);
                 }

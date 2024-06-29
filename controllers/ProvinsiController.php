@@ -30,25 +30,22 @@ class ProvinsiController extends Controller
 
     public function actionForm($id_provinsi = null)
     {
-        if (isset($id_provinsi)) {
-            $model = $this->findModel(['id_provinsi' => $id_provinsi]);
+        if ($id_provinsi !== null) {
+            $model = Provinsi::findOne($id_provinsi);
+            if (!$model) {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         } else {
-            $model = new Provinsi;
+            $model = new Provinsi();
         }
 
-        if ($this->request->isPost) {
-            $model->load($this->request->post());
-
-            if ($this->request->isAjax) {
-                return $this->asJson(ActiveForm::validate($model));
-            }
-
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
         }
 
-        return $this->renderAjax('form', get_defined_vars());
+        return $this->renderAjax('form', [
+            'model' => $model,
+        ]);
     }
 
     public function actionView($id_provinsi)
