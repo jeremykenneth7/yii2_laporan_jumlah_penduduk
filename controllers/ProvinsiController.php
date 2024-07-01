@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use yii\widgets\ActiveForm;
 use jeemce\models\MimikSearch;
 use app\models\Provinsi;
 use yii\web\NotFoundHttpException;
+use jeemce\controllers\AppCrudTrait;
 
 class ProvinsiController extends Controller
 {
-    use CrudTrait;
+    use AppCrudTrait;
 
     public function actionIndex()
     {

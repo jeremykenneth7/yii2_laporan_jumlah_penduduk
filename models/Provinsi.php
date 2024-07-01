@@ -32,7 +32,7 @@ class Provinsi extends \jeemce\models\Model
             [['nama_provinsi'], 'required'],
             [['id_provinsi'], 'string', 'max' => 3],
             [['nama_provinsi'], 'string', 'max' => 256],
-            [['id_provinsi'], 'unique'],
+            [['id_provinsi','nama_provinsi'], 'unique'],
         ];
     }
 

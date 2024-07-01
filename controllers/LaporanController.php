@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\models\Penduduk;
 use app\models\Provinsi;
 use yii\base\DynamicModel;
 use yii\data\ActiveDataProvider;
@@ -12,7 +11,6 @@ use yii\web\NotFoundHttpException;
 
 class LaporanController extends Controller
 {
-    use CrudTrait;
 
     public function actionIndex()
     {

@@ -5,13 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Kabupaten;
 use yii\base\DynamicModel;
-use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use jeemce\controllers\AppCrudTrait;
 
 class KabupatenController extends Controller
 {
-    use CrudTrait;
+    use AppCrudTrait;
 
     public function actionIndex()
     {

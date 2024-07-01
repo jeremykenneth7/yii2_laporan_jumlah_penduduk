@@ -9,10 +9,11 @@ use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
+use jeemce\controllers\AppCrudTrait;
 
 class PendudukController extends Controller
 {
-    use CrudTrait;
+    use AppCrudTrait;
 
     public function actionIndex()
     {
