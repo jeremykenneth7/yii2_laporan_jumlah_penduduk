@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use Yii;
-use jeemce\models\MimikSearch;
+use yii\helpers\Url;
 use app\models\Provinsi;
+use jeemce\models\MimikSearch;
+use jeemce\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use jeemce\controllers\AppCrudTrait;
 
@@ -41,7 +43,10 @@ class ProvinsiController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
+            Yii::$app->session->setFlash('saveFail', implode(PHP_EOL, ArrayHelper::flat($model->errors)));
         }
+
+        Yii::$app->session->setFlash('saveDone', 'Data berhasil disimpan.');
 
         return $this->renderAjax('form', [
             'model' => $model,

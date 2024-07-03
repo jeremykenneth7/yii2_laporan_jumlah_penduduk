@@ -2,7 +2,7 @@
 
 use app\models\Provinsi;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 
 /**
  * @var \jeemce\AppView $this
