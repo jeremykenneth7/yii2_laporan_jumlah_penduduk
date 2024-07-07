@@ -41,6 +41,9 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
             ],
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_provinsi]);
+                if ($action === 'form') {
+                    return Url::to(['provinsi/form', 'id_provinsi' => $model->id_provinsi]);
+                }
                 if ($action === 'delete') {
                     $href = Url::current([$action, 'id' => $model->id_provinsi]);
                 }
@@ -59,3 +62,5 @@ $this->params['breadcrumbs'][] = 'Data Provinsi';
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>
+
+<?= $this->render('../layouts/modal.php') ?>

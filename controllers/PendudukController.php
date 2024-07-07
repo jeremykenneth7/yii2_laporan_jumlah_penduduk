@@ -23,6 +23,8 @@ class PendudukController extends Controller
             'filter' => [],
         ], Yii::$app->request->queryParams));
 
+        $model = new Penduduk();
+
         if (!empty($searchModel->search)) {
             $searchModel->search = strtolower($searchModel->search);
         }
@@ -42,10 +44,7 @@ class PendudukController extends Controller
         ]);
         $dataProvider->pagination->pageSize = 10;
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', get_defined_vars());
     }
 
     public function actionForm($id_penduduk = null)
@@ -64,7 +63,10 @@ class PendudukController extends Controller
             }
 
             if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Data berhasil disimpan.');
                 return $this->redirect(['index']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Gagal menyimpan data.');
             }
         }
 

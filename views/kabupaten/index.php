@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use yii\helpers\Html;
 use yii\grid\GridView;
 use jeemce\helpers\WidgetHelper;
 
@@ -32,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
         ['class' => jeemce\grid\SerialColumn::class],
         'nama_kabupaten',
         [
-            'attribute' => 'provinsi.nama_provinsi', 
+            'attribute' => 'provinsi.nama_provinsi',
             'value' => function ($model) {
                 return $model->provinsi->nama_provinsi;
             },
@@ -41,10 +40,16 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'template' => '{form} {delete}',
+            'buttons' => [
+                'form' => [
+                    'icon' => '<i class="bi bi-pencil"></i>',
+                    'options' => ['onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
+                ],
+            ],
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_kabupaten]);
                 if ($action === 'form') {
-                    return Url::to(['form', 'id_kabupaten' => $model->id_kabupaten]);
+                    return Url::to(['kabupaten/form', 'id_kabupaten' => $model->id_kabupaten]);
                 }
                 if ($action === 'delete') {
                     $href = Url::current([$action, 'id' => $model->id_kabupaten]);
@@ -65,3 +70,5 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>
+
+<?= $this->render('../layouts/modal.php') ?>

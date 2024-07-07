@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Kabupaten;
 use yii\base\DynamicModel;
+use yii\widgets\ActiveForm;
+use jeemce\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use jeemce\controllers\AppCrudTrait;
@@ -26,6 +28,8 @@ class KabupatenController extends Controller
             $searchModel->search = strtolower($searchModel->search);
         }
 
+        $model = new Kabupaten();
+
         $searchQuery = Kabupaten::find()
             ->joinWith('provinsi a')
             ->andFilterWhere($searchModel->filter)
@@ -42,28 +46,23 @@ class KabupatenController extends Controller
         ]);
         $dataProvider->pagination->pageSize = 10;
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', get_defined_vars());
     }
 
     public function actionForm($id_kabupaten = null)
     {
-        if ($id_kabupaten !== null) {
+        if (!empty($id_kabupaten)) {
             $model = $this->findModel(['id_kabupaten' => $id_kabupaten]);
-            if (!$model) {
-                throw new NotFoundHttpException('The requested page does not exist.');
-            }
         } else {
-            $model = new Kabupaten();
+            $model = new Kabupaten;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            } else {
-                Yii::$app->session->setFlash('error', 'Failed to save Kabupaten.');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('saveDone', 'Data berhasil disimpan.');
+            return $this->redirect(['index']);
+        } else {
+            if ($model->hasErrors()) {
+                Yii::$app->session->setFlash('saveFail', implode(PHP_EOL, ArrayHelper::flat($model->errors)));
             }
         }
 

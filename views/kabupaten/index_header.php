@@ -3,6 +3,7 @@
 use app\models\Provinsi;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Kabupaten;
 
 /**
  * @var \jeemce\AppView $this
@@ -27,7 +28,6 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'nama_provins
         'class' => 'card-header d-flex',
     ],
 ]) ?>
-
 
 <div class="me-lg-2">
     <?= Html::a('<i class="bi bi-plus me-1"></i>Tambah', ['form'], [

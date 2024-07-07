@@ -21,8 +21,10 @@ class ProvinsiController extends Controller
 
         $searchQuery = Provinsi::find();
 
+        $model = new Provinsi();
+
         $dataProvider = $searchModel->search($searchQuery, $this->request->queryParams);
-        $dataProvider->pagination->pageSize = 10; 
+        $dataProvider->pagination->pageSize = 10;
         $dataProvider->sort->defaultOrder = [
             'id_provinsi' => SORT_ASC,
         ];
@@ -42,16 +44,19 @@ class ProvinsiController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('saveDone', 'Data berhasil disimpan.');
             return $this->redirect(['index']);
-            Yii::$app->session->setFlash('saveFail', implode(PHP_EOL, ArrayHelper::flat($model->errors)));
+        } else {
+            if ($model->hasErrors()) {
+                Yii::$app->session->setFlash('saveFail', implode(PHP_EOL, ArrayHelper::flat($model->errors)));
+            }
         }
-
-        Yii::$app->session->setFlash('saveDone', 'Data berhasil disimpan.');
 
         return $this->renderAjax('form', [
             'model' => $model,
         ]);
     }
+
 
     public function actionView($id_provinsi)
     {

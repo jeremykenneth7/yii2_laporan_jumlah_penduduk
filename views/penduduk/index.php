@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use yii\helpers\Html;
 use yii\grid\GridView;
 use jeemce\helpers\WidgetHelper;
 
@@ -39,10 +38,16 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'template' => '{form} {delete}',
+            'buttons' => [
+                'form' => [
+                    'icon' => '<i class="bi bi-pencil"></i>',
+                    'options' => ['onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
+                ],
+            ],
             'urlCreator' => function ($action, $model) {
                 $href = Url::current([$action, 'id' => $model->id_penduduk]);
                 if ($action === 'form') {
-                    return Url::to(['form', 'id_penduduk' => $model->id_penduduk]);
+                    return Url::to(['penduduk/form', 'id_penduduk' => $model->id_penduduk]);
                 }
                 if ($action === 'delete') {
                     $href = Url::current([$action, 'id' => $model->id_penduduk]);
@@ -63,3 +68,5 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>
+
+<?= $this->render('../layouts/modal.php') ?>

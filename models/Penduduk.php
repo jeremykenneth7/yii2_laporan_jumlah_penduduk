@@ -36,7 +36,7 @@ class Penduduk extends \jeemce\models\Model
     public function rules()
     {
         return [
-            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi'], 'required'],
+            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required'],
             [['nama'], 'string', 'max' => 100],
             [['nik'], 'string', 'max' => 18],
             [['jenis_kelamin'], 'in', 'range' => ['Laki-laki', 'Perempuan']],
