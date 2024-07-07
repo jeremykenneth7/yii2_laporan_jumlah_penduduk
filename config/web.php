@@ -59,6 +59,10 @@ $config = [
     'params' => $params,
 ];
 
+if (getenv('YII_MAINTENANCE') === '1') {
+    $config['catchAll'] = ['site/maintenance'];
+}
+
 if (getenv('YII_ENV') === 'dev') {
     // configuration adjustments for 'dev' environment
     if (getenv('YII_DEBUG')) {

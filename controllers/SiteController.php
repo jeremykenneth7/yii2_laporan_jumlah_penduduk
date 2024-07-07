@@ -21,4 +21,9 @@ class SiteController extends Controller
         }
     }
 
+    public function actionMaintenance()
+    {
+        $this->layout = false;
+        return $this->render('maintenance');
+    }
 }
