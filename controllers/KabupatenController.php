@@ -51,7 +51,7 @@ class KabupatenController extends Controller
 
     public function actionForm($id_kabupaten = null)
     {
-        if (!empty($id_kabupaten)) {
+        if (isset($id_kabupaten)) {
             $model = $this->findModel(['id_kabupaten' => $id_kabupaten]);
         } else {
             $model = new Kabupaten;
