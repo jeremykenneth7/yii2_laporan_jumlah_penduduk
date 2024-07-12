@@ -33,7 +33,8 @@ foreach ($kabupatenOptions as $kabupaten) {
 
 <?php $form = ActiveForm::begin([
     'id' => 'form-elem',
-    'options' => ['autocomplete' => 'off', 'class' => 'modal-body'],
+    'enableClientValidation' => true,
+    'enableAjaxValidation' => true,
 ]); ?>
 
 <div class="modal-header">

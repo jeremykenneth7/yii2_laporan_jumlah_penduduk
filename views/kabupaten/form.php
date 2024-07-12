@@ -21,7 +21,8 @@ $provinsiOptions = \yii\helpers\ArrayHelper::map($provinsiOptions, 'id_provinsi'
 
 <?php $form = ActiveForm::begin([
     'id' => 'form-elem',
-    'options' => ['autocomplete' => 'off', 'class' => 'modal-body'],
+    'enableClientValidation' => true,
+    'enableAjaxValidation' => true,
 ]); ?>
 
 <div class="modal-header">

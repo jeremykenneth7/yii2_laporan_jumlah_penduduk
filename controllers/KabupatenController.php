@@ -51,31 +51,21 @@ class KabupatenController extends Controller
 
     public function actionForm($id_kabupaten = null)
     {
-        if (isset($id_kabupaten)) {
-            $model = $this->findModel(['id_kabupaten' => $id_kabupaten]);
+        $class = Kabupaten::class;
+
+        if ($id_kabupaten) {
+            $model = $this->findModel([
+                'id_kabupaten' => $id_kabupaten
+            ]);
         } else {
-            $model = new Kabupaten;
+            $model = new $class;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('saveDone', 'Data berhasil disimpan.');
-            return $this->redirect(['index']);
-        } else {
-            if ($model->hasErrors()) {
-                Yii::$app->session->setFlash('saveFail', implode(PHP_EOL, ArrayHelper::flat($model->errors)));
-            }
+        if (($result = $this->save($model, ['index']))) {
+            return $result;
         }
 
-        return $this->renderAjax('form', [
-            'model' => $model,
-        ]);
-    }
-
-
-    public function actionView($id_kabupaten)
-    {
-        $model = $this->findModel(get_defined_vars());
-        return $this->renderAjax('//partials/view', get_defined_vars());
+        return $this->renderAjax('form', get_defined_vars());
     }
 
     protected function findModel($params)

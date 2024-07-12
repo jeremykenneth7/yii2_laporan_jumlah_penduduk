@@ -36,14 +36,14 @@ class Penduduk extends \jeemce\models\Model
     public function rules()
     {
         return [
-            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required'],
+            [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required', 'message' => '{attribute} tidak boleh kosong.'],
             [['nama'], 'string', 'max' => 100],
             [['nik'], 'string', 'max' => 18],
-            [['jenis_kelamin'], 'in', 'range' => ['Laki-laki', 'Perempuan']],
-            [['tanggal_lahir'], 'date', 'format' => 'php:Y-m-d'],
+            [['jenis_kelamin'], 'in', 'range' => ['Laki-laki', 'Perempuan'], 'message' => 'Pilih jenis kelamin "Laki-laki" atau "Perempuan".'],
+            [['tanggal_lahir'], 'date', 'format' => 'php:Y-m-d', 'message' => 'Format tanggal lahir harus yyyy-mm-dd.'],
             [['alamat'], 'string'],
             [['id_kabupaten', 'id_provinsi'], 'string', 'max' => 8],
-            [['id_penduduk'], 'unique'],
+            [['id_penduduk'], 'unique', 'message' => 'ID Penduduk sudah ada dalam sistem.'],
         ];
     }
 
@@ -100,5 +100,4 @@ class Penduduk extends \jeemce\models\Model
     {
         return substr(md5(uniqid(rand(), true)), 0, 8);
     }
-    
 }

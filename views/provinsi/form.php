@@ -10,8 +10,9 @@ use yii\helpers\Html;
  */
 ?>
 <?php $form = ActiveForm::begin([
-    'id' => 'form-elem',
-    'options' => ['autocomplete' => 'off', 'class' => 'modal-body'],
+    'id' => 'form-elem', 
+    'enableClientValidation' => true,
+    'enableAjaxValidation' => true,
 ]); ?>
 
 <div class="modal-header">
@@ -29,7 +30,7 @@ use yii\helpers\Html;
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="modal-footer">

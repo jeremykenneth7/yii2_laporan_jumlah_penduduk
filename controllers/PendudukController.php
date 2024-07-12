@@ -49,34 +49,23 @@ class PendudukController extends Controller
 
     public function actionForm($id_penduduk = null)
     {
-        if (isset($id_penduduk)) {
-            $model = $this->findModel(['id_penduduk' => $id_penduduk]);
+        $class = Penduduk::class;
+
+        if ($id_penduduk) {
+            $model = $this->findModel([
+                'id_penduduk' => $id_penduduk
+            ]);
         } else {
-            $model = new Penduduk;
+            $model = new $class;
         }
 
-        if ($this->request->isPost) {
-            $model->load($this->request->post());
-
-            if ($this->request->isAjax) {
-                return $this->asJson(ActiveForm::validate($model));
-            }
-
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Data berhasil disimpan.');
-                return $this->redirect(['index']);
-            } else {
-                Yii::$app->session->setFlash('error', 'Gagal menyimpan data.');
-            }
+        if (($result = $this->save($model, ['index']))) {
+            return $result;
         }
 
-        return $this->renderAjax('form', get_defined_vars());
-    }
-
-    public function actionView($id_penduduk)
-    {
-        $model = $this->findModel(get_defined_vars());
-        return $this->renderAjax('//partials/view', get_defined_vars());
+        return $this->renderAjax('form', [
+            'model' => $model,
+        ]);
     }
 
     protected function findModel($params)

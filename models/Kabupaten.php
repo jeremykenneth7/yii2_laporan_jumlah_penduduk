@@ -33,8 +33,8 @@ class Kabupaten extends \jeemce\models\Model
     public function rules()
     {
         return [
-            [['id_provinsi', 'nama_kabupaten'], 'required'],
-            [['id_kabupaten', 'nama_kabupaten'], 'unique'],
+            [['id_provinsi', 'nama_kabupaten'],'required', 'message' => 'Nama Kabupaten tidak boleh kosong.'],
+            [['id_kabupaten', 'nama_kabupaten'],'unique', 'message' => 'Nama Kabupaten "{value}" sudah ada.'],
             [['id_kabupaten'], 'string', 'max' => 5],
             [['nama_kabupaten'], 'string', 'max' => 256],
         ];
