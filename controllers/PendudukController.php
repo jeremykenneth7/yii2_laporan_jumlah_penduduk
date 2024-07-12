@@ -42,6 +42,9 @@ class PendudukController extends Controller
             'query' => $searchQuery,
         ]);
         $dataProvider->pagination->pageSize = 10;
+        $dataProvider->sort->defaultOrder = [
+            'nama' => SORT_ASC,
+        ];
 
         return $this->render('index', get_defined_vars());
     }

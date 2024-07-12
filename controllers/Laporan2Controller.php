@@ -192,4 +192,10 @@ class Laporan2Controller extends Controller
         echo $htmlContent;
         exit;
     }
+
+    public function actionSearch()
+    {
+        return $this->actionIndex();
+    }
+
 }

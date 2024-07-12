@@ -1,22 +1,55 @@
 <?php
 
+use yii\helpers\Url;
+
 /** @var yii\web\View $this */
 
 $this->title = $this->params['pageName'] = "Laporan Penduduk";
 ?>
 
+<style>
+    .jumbotron {
+        background: url('<?= Url::to('@web/images/data.jpg') ?>') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        padding: 100px 0;
+    }
+
+    .display-4 {
+        font-size: 50px;
+        font-weight: 500;
+        color: #000;
+    }
+
+    .lead {
+        font-weight: 500;
+        font-size: 30px;
+        color: #000;
+    }
+</style>
+
 <div class="site-index">
-    <div class="body-content">
-        <div class="row justify-content-center mb-5 mt-5">
-            <div class="col-md-8 text-center">
-                <h2 class="display-4 mb-4">Laporan Jumlah Penduduk</h2>
-                <p class="lead">Sistem Laporan Data Penduduk, Data Provinsi, dan Data Kabupaten</p>
+    <div class="jumbotron text-center">
+        <h2 class="display-4 mb-4">Laporan Jumlah Penduduk</h2>
+        <p class="lead">Sistem Laporan Data Penduduk, Data Provinsi, dan Data Kabupaten</p>
+        <!-- Searching -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6 mt-3">
+                <form action="<?= Yii::$app->urlManager->createUrl(['/laporan2']) ?>" method="get" class="input-group">
+                    <input type="hidden" name="filter[nama_provinsi]" value="<?= Yii::$app->request->get('filter')['nama_provinsi'] ?? null ?>">
+                    <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan Nama Provinsi atau Nama Kabupaten" value="<?= Yii::$app->request->get('search') ?>">
+                    <button type="submit" class="btn btn-outline-primary">Cari</button>
+                </form>
             </div>
         </div>
+    </div>
+
+    <div class="body-content">
 
         <!-- Carousel Start -->
         <div id="dataCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+            <div class="carousel-inner mt-5">
                 <?php foreach ($carouselItems as $index => $items) : ?>
                     <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                         <div class="row">

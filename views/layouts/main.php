@@ -75,7 +75,7 @@ $this->beginPage();
     <header id="header">
         <?php
         NavBar::begin([
-            'brandLabel' => Html::img('./photo.png', ['alt' => '', 'class' => 'img-fluid']) . '<span class="app-title">' . Yii::$app->params['appName'] . '</span>',
+            'brandLabel' => Html::img('@web/images/laporan.png', ['alt' => '', 'class' => 'img-fluid', 'style' => 'max-height: 30px;']) . '<span class="app-title">' . Yii::$app->params['appName'] . '</span>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-expand-md navbar-dark bg-dark fixed-top',
@@ -91,7 +91,7 @@ $this->beginPage();
                 ['label' => 'Laporan Provinsi', 'url' => ['/laporan/index']],
                 ['label' => 'Laporan Kabupaten', 'url' => ['/laporan2/index']],
             ],
-            'encodeLabels' => false, // Allows HTML in labels
+            'encodeLabels' => false,
         ]);
 
         NavBar::end();
