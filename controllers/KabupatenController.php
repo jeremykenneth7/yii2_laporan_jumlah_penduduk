@@ -5,8 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Kabupaten;
 use yii\base\DynamicModel;
-use yii\widgets\ActiveForm;
-use jeemce\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use jeemce\controllers\AppCrudTrait;

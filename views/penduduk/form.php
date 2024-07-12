@@ -85,9 +85,13 @@ foreach ($kabupatenOptions as $kabupaten) {
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <?= $form->field($model, 'id_kabupaten')->dropDownList([], ['prompt' => 'Select Kabupaten', 'id' => 'kabupaten-field'])->label('Kabupaten') ?>
+            <?= $form->field($model, 'id_kabupaten')->dropDownList(
+                $model->id_provinsi ? $kabupatenOptionsArray[$model->id_provinsi] : [],
+                ['prompt' => 'Select Kabupaten', 'id' => 'kabupaten-field']
+            )->label('Kabupaten') ?>
         </div>
     </div>
+
 </div>
 
 <div class="modal-footer">
@@ -99,7 +103,7 @@ foreach ($kabupatenOptions as $kabupaten) {
 
 <?php
 $kabupatenJsOptions = json_encode($kabupatenOptionsArray);
-
+$selectedKabupaten = $model->id_kabupaten ? $model->id_kabupaten : 'null';
 $script = <<<JS
     function updateKabupatenOptions() {
         var provinsiField = document.getElementById('provinsi-field');
@@ -113,6 +117,9 @@ $script = <<<JS
                 var option = document.createElement('option');
                 option.value = kabupaten.id_kabupaten;
                 option.text = kabupaten.nama_kabupaten;
+                if (option.value == $selectedKabupaten) {
+                    option.selected = true;
+                }
                 kabupatenField.add(option);
             });
         }
@@ -126,9 +133,16 @@ $script = <<<JS
         var selectedProvinsi = provinsiField.options[provinsiField.selectedIndex].text;
         var selectedKabupaten = kabupatenField.options[kabupatenField.selectedIndex].text;
         
-        if (provinsiField.value && kabupatenField.value) {
-            alamatField.value += ", "+ selectedProvinsi + ", " + selectedKabupaten;
-        }
+
+        var currentAlamat = alamatField.value.trim();
+        
+        var newAlamat = currentAlamat ? currentAlamat + ', ' + selectedProvinsi + ', ' + selectedKabupaten : selectedProvinsi + ', ' + selectedKabupaten;
+        
+        alamatField.value = newAlamat;
+    });
+
+    document.getElementById('provinsi-field').addEventListener('change', function() {
+        updateKabupatenOptions();
     });
 
     updateKabupatenOptions();

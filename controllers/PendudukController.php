@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Penduduk;
 use yii\base\DynamicModel;
-use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
