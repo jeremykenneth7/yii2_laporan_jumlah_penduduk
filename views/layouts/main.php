@@ -10,7 +10,6 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
-// Registering assets and meta tags
 AppAsset::register($this);
 $this->registerCsrfMetaTags();
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
@@ -19,7 +18,9 @@ $this->registerMetaTag(['name' => 'description', 'content' => $this->params['met
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 
-// Begin rendering the page
+$this->registerCssFile('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css');
+$this->registerJsFile('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 $this->beginPage();
 ?>
 <!DOCTYPE html>
@@ -60,7 +61,6 @@ $this->beginPage();
             margin-top: -5px;
             color: #fff;
             text-transform: uppercase;
-
         }
 
         .navbar-brand .app-title span {
@@ -109,6 +109,19 @@ $this->beginPage();
     </main>
 
     <?php $this->endBody(); ?>
+
+    <?php
+    if (Yii::$app->session->hasFlash('success')) {
+        $this->registerJs("
+            Swal.fire({
+                title: 'Success!',
+                text: '" . Yii::$app->session->getFlash('success') . "',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        ");
+    }
+    ?>
 </body>
 
 </html>

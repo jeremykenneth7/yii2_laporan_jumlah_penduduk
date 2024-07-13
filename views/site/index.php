@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$this->title = $this->params['pageName'] = "Laporan Penduduk";
+$this->title = $this->params['pageName'] = "Laporan Jumlah Penduduk";
 ?>
 
 <style>
@@ -18,7 +18,7 @@ $this->title = $this->params['pageName'] = "Laporan Penduduk";
 
     .display-4 {
         font-size: 50px;
-        font-weight: 500;
+        font-weight: 600;
         color: #000;
     }
 
@@ -60,7 +60,7 @@ $this->title = $this->params['pageName'] = "Laporan Penduduk";
                                             <i class="fas fa-map-marked-alt fa-3x mb-4 text-primary"></i>
                                             <h5 class="card-title"><?= htmlspecialchars($provinsi->nama_provinsi) ?></h5>
                                             <p class="card-text">Jumlah Penduduk: <?= count($provinsi->penduduk) ?></p>
-                                            <a class="btn btn-outline-primary" href="/laporan">Lihat Detail &raquo;</a>
+                                            <a class="btn btn-outline-primary" href="<?= Url::to(['/laporan2', 'search' => $provinsi->nama_provinsi]) ?>">Lihat Detail &raquo;</a>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,8 @@ $this->title = $this->params['pageName'] = "Laporan Penduduk";
                     </div>
                 <?php endforeach; ?>
             </div>
-            <!-- Left and right controls -->
+
+            <!-- Kontrol di Carrousel -->
             <button class="carousel-control-prev" type="button" data-bs-target="#dataCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>

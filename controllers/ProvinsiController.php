@@ -41,7 +41,7 @@ class ProvinsiController extends Controller
             $model = new $class;
         }
         if (($result = $this->save($model, ['index']))) {
-            Yii::$app->session->setFlash('success', 'Data saved successfully.');
+            Yii::$app->session->setFlash('success', 'Data Provinsi berhasil disimpan.');
             return $result;
         }
 

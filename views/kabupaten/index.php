@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
 ]) ?>
 
 <?= GridView::widget([
+    'tableOptions' => ['class' => 'table table-bordered table-hover'],
     'dataProvider' => $dataProvider,
     'summary' => false,
     'pager' => [
@@ -28,8 +29,16 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
         'options' => ['class' => 'pagination d-none'],
     ],
     'columns' => [
-        ['class' => jeemce\grid\SerialColumn::class],
-        'nama_kabupaten',
+        [
+            'class' => jeemce\grid\SerialColumn::class,
+            'header' => 'No',
+        ],
+        [
+            'attribute' => 'nama_kabupaten',
+            'label' => 'Nama Kabupaten',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
         [
             'attribute' => 'provinsi.nama_provinsi',
             'value' => function ($model) {
@@ -40,10 +49,15 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'template' => '{form} {delete}',
+            'headerOptions' => ['class' => 'text-center align-middle'],
+            'contentOptions' => ['class' => 'text-center align-middle'],
             'buttons' => [
                 'form' => [
                     'icon' => '<i class="bi bi-pencil"></i>',
                     'options' => ['onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
+                ],
+                'delete' => [
+                    'icon' => '<i class="bi bi-trash text-danger"></i>',
                 ],
             ],
             'urlCreator' => function ($action, $model) {
@@ -63,10 +77,10 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
 ]) ?>
 
 <div class="card-footer d-flex">
-    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination]) ?>
-    <div class="card-title ml-auto align-self-center">
+    <div class="card-title me-3 align-self-center">
         <?= WidgetHelper::providerSummary($dataProvider) ?>
     </div>
+    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination, 'options' => ['class' => 'ms-auto']]) ?>
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>

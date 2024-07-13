@@ -10,7 +10,7 @@ use yii\helpers\Html;
  */
 ?>
 <?php $form = ActiveForm::begin([
-    'id' => 'form-elem', 
+    'id' => 'form-elem',
     'enableClientValidation' => true,
     'enableAjaxValidation' => true,
 ]); ?>
@@ -22,7 +22,6 @@ use yii\helpers\Html;
 
 <div class="modal-body">
     <?= $form->field($model, 'id_provinsi')->hiddenInput()->label(false) ?>
-
     <div class="row">
         <div class="col">
             <div class="col-md-6 offset-md-3">
@@ -30,7 +29,6 @@ use yii\helpers\Html;
             </div>
         </div>
     </div>
-
 </div>
 
 <div class="modal-footer">

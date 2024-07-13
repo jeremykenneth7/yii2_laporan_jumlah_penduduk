@@ -44,6 +44,7 @@ class Penduduk extends \jeemce\models\Model
             [['alamat'], 'string'],
             [['id_kabupaten', 'id_provinsi'], 'string', 'max' => 8],
             [['id_penduduk'], 'unique', 'message' => 'ID Penduduk sudah ada dalam sistem.'],
+            [['nik'], 'unique', 'message' => 'NIK sudah ada dalam sistem.'],
         ];
     }
 

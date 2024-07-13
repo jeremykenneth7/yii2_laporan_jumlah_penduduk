@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = 'Laporan Kabupaten';
 ]) ?>
 
 <?= GridView::widget([
+    'tableOptions' => ['class' => 'table table-bordered table-hover'],
     'dataProvider' => $dataProvider,
     'summary' => false,
     'pager' => [
@@ -29,14 +30,22 @@ $this->params['breadcrumbs'][] = 'Laporan Kabupaten';
         'options' => ['class' => 'pagination d-none'],
     ],
     'columns' => [
-        ['class' => jeemce\grid\SerialColumn::class],
+        [
+            'class' => jeemce\grid\SerialColumn::class,
+            'header' => 'No',
+        ],
         [
             'attribute' => 'nama_provinsi',
             'value' => function ($model) {
                 return $model->provinsi->nama_provinsi;
             },
         ],
-        'nama_kabupaten',
+        [
+            'attribute' => 'nama_kabupaten',
+            'label' => 'Nama Kabupaten',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
         [
             'label' => 'Jumlah Penduduk',
             'value' => function ($model) {
@@ -47,10 +56,10 @@ $this->params['breadcrumbs'][] = 'Laporan Kabupaten';
 ]) ?>
 
 <div class="card-footer d-flex">
-    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination]) ?>
-    <div class="card-title ml-auto align-self-center">
+    <div class="card-title me-3 align-self-center">
         <?= WidgetHelper::providerSummary($dataProvider) ?>
     </div>
+    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination, 'options' => ['class' => 'ms-auto']]) ?>
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>

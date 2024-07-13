@@ -24,16 +24,9 @@ use kartik\form\ActiveForm;
     <?= Html::a('<i class="bi bi-plus me-1"></i>Tambah', ['form'], [
         'data-pjax' => 0,
         'onclick' => 'modalFormAjax(this,event)',
-        'class' => 'btn btn-info d-block',
+        'class' => 'btn btn-primary d-block',
     ]) ?>
 </div>
-
-<?= Html::a('<i class="bi bi-trash me-1"></i>Hapus', ['delete-all'], [
-    'id' => 'btn-delete-all',
-    'class' => 'btn btn-danger ms-2 visually-hidden',
-    'data' => ['pjax' => 0, 'manual-tbody' => ""],
-    'onclick' => 'deleteAllConfirm (this,event)'
-]) ?>
 
 <div class="ms-auto"></div>
 

@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
 ]) ?>
 
 <?= GridView::widget([
+    'tableOptions' => ['class' => 'table table-bordered table-hover'],
     'dataProvider' => $dataProvider,
     'summary' => false,
     'pager' => [
@@ -28,20 +29,58 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
         'options' => ['class' => 'pagination d-none'],
     ],
     'columns' => [
-        ['class' => jeemce\grid\SerialColumn::class],
-        'nama',
-        'nik',
-        'tanggal_lahir',
-        'alamat',
-        'jenis_kelamin',
-        'timestamp',
+        [
+            'class' => jeemce\grid\SerialColumn::class,
+            'header' => 'No',
+        ],
+        [
+            'attribute' => 'nama',
+            'label' => 'Nama',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
+        [
+            'attribute' => 'nik',
+            'label' => 'NIK',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
+        [
+            'attribute' => 'tanggal_lahir',
+            'label' => 'Tanggal Lahir',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
+        [
+            'attribute' => 'alamat',
+            'label' => 'Alamat',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
+        [
+            'attribute' => 'jenis_kelamin',
+            'label' => 'Jenis Kelamin',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
+        [
+            'attribute' => 'timestamp',
+            'label' => 'Timestamp',
+            'contentOptions' => ['class' => 'align-middle'],
+            'enableSorting' => false,
+        ],
         [
             'class' => \jeemce\grid\ActionColumn::class,
             'template' => '{form} {delete}',
+            'headerOptions' => ['class' => 'text-center align-middle'],
+            'contentOptions' => ['class' => 'text-center align-middle'],
             'buttons' => [
                 'form' => [
                     'icon' => '<i class="bi bi-pencil"></i>',
                     'options' => ['onclick' => 'modalFormAjax(this,event)', 'data-pjax' => 0],
+                ],
+                'delete' => [
+                    'icon' => '<i class="bi bi-trash text-danger"></i>',
                 ],
             ],
             'urlCreator' => function ($action, $model) {
@@ -61,10 +100,10 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
 ]) ?>
 
 <div class="card-footer d-flex">
-    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination]) ?>
-    <div class="card-title ml-auto align-self-center">
+    <div class="card-title me-3 align-self-center">
         <?= WidgetHelper::providerSummary($dataProvider) ?>
     </div>
+    <?= yii\bootstrap5\LinkPager::widget(['pagination' => $dataProvider->pagination, 'options' => ['class' => 'ms-auto']]) ?>
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>

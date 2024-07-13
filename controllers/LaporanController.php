@@ -38,6 +38,9 @@ class LaporanController extends Controller
             'query' => $searchQuery,
         ]);
         $dataProvider->pagination->pageSize = 10;
+        $dataProvider->sort->defaultOrder = [
+            'nama_provinsi' => SORT_ASC,
+        ];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
