@@ -23,6 +23,8 @@ Pastikan sistem Anda memenuhi persyaratan berikut sebelum menginstal proyek:
    ```bash
    git clone https://github.com/jeremykenneth7/yii2_laporan_jumlah_penduduk.git
 
+   ```
+
 2. **Instal Dependensi**
 
    Masuk ke direktori proyek dan jalankan perintah berikut untuk menginstal dependensi PHP menggunakan Composer.
@@ -31,18 +33,21 @@ Pastikan sistem Anda memenuhi persyaratan berikut sebelum menginstal proyek:
    cd yii2_laporan_jumlah_penduduk
    composer install
 
+   ```
+
 3. **Konfigurasi .env**
 
-  ```bash
+   ```bash
    cp .env.default .env
+
+   ```
 
 4. **Konfigurasi Database**
 
-    Import database laporan_penduduk.sql
+   Import database laporan_penduduk.sql
 
-4. **Jalankan Aplikasi**
+5. **Jalankan Aplikasi**
 
-    ```bash
-    php yii serve
-
-
+   ```bash
+   php yii serve
+   ```
