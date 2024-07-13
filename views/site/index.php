@@ -69,47 +69,48 @@ $this->title = $this->params['pageName'] = "Laporan Jumlah Penduduk";
                     </div>
                 <?php endforeach; ?>
             </div>
-
-            <!-- Kontrol di Carrousel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#dataCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#dataCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-        <!-- Carousel End -->
 
-        <!-- Pagination Indicators -->
-        <ol class="carousel-indicators">
-            <?php foreach ($carouselItems as $index => $items) : ?>
-                <li data-bs-target="#dataCarousel" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>"></li>
-            <?php endforeach; ?>
-        </ol>
+        <!-- Kontrol di Carrousel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#dataCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#dataCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- Carousel End -->
 
-        <div class="row text-center mt-4">
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 shadow">
-                    <div class="card-body">
-                        <i class="fas fa-users fa-3x mb-4 text-primary"></i>
-                        <h2 class="h4">Laporan Data Penduduk Per Provinsi</h2>
-                        <p class="card-text">Laporan Data penduduk berdasarkan provinsi.</p>
-                        <a class="btn btn-outline-primary" href="/laporan/index">Lihat Laporan &raquo;</a>
-                    </div>
+    <!-- Pagination Indicators -->
+    <ol class="carousel-indicators">
+        <?php foreach ($carouselItems as $index => $items) : ?>
+            <li data-bs-target="#dataCarousel" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>"></li>
+        <?php endforeach; ?>
+    </ol>
+
+    <div class="row text-center mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x mb-4 text-primary"></i>
+                    <h2 class="h4">Laporan Data Penduduk Per Provinsi</h2>
+                    <p class="card-text">Laporan Data penduduk berdasarkan provinsi.</p>
+                    <a class="btn btn-outline-primary" href="/laporan/index">Lihat Laporan &raquo;</a>
                 </div>
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 shadow">
-                    <div class="card-body">
-                        <i class="fas fa-users fa-3x mb-4 text-primary"></i>
-                        <h2 class="h4">Laporan Data Penduduk Per Kabupaten</h2>
-                        <p class="card-text">Laporan Data penduduk berdasarkan kabupaten dan provinsi.</p>
-                        <a class="btn btn-outline-primary" href="/laporan2/index">Lihat Laporan &raquo;</a>
-                    </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x mb-4 text-primary"></i>
+                    <h2 class="h4">Laporan Data Penduduk Per Kabupaten</h2>
+                    <p class="card-text">Laporan Data penduduk berdasarkan kabupaten dan provinsi.</p>
+                    <a class="btn btn-outline-primary" href="/laporan2/index">Lihat Laporan &raquo;</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

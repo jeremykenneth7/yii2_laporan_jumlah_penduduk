@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Provinsi;
-use app\models\Kabupaten;
 
 class SiteController extends Controller
 {
@@ -16,7 +15,6 @@ class SiteController extends Controller
             ->joinWith('kabupaten')
             ->leftJoin('penduduk', 'kabupaten.id_provinsi = provinsi.id_provinsi')
             ->groupBy('provinsi.id_provinsi')
-            ->having('jumlah_penduduk > 0')
             ->orderBy('RAND()')
             ->all();
 

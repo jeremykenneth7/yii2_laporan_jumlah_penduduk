@@ -30,6 +30,7 @@ $this->beginPage();
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-vr+xdhp3PRk7e7b8MfQcKe3S+KkS4UftPV9JFXcG2AWvBNpNwfr+ueJLmizV2cR9s5sg9Aq/HyjX0skQrqISYQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         .navbar-brand img {
             max-width: 50px;
