@@ -107,5 +107,3 @@ $this->params['breadcrumbs'][] = 'Data Penduduk';
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>
-
-<?= $this->render('../layouts/modal.php') ?>

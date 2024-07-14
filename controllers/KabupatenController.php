@@ -63,7 +63,6 @@ class KabupatenController extends Controller
         }
 
         if (($result = $this->save($model, ['index']))) {
-            Yii::$app->session->setFlash('success', 'Data Provinsi berhasil disimpan.');
             return $result;
         }
 

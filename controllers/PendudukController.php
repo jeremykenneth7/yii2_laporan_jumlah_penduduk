@@ -62,13 +62,10 @@ class PendudukController extends Controller
         }
 
         if (($result = $this->save($model, ['index']))) {
-            Yii::$app->session->setFlash('success', 'Data Provinsi berhasil disimpan.');
             return $result;
         }
 
-        return $this->renderAjax('form', [
-            'model' => $model,
-        ]);
+        return $this->renderAjax('form', get_defined_vars());
     }
 
     protected function findModel($params)

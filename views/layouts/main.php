@@ -17,10 +17,6 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
-
-$this->registerCssFile('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css');
-$this->registerJsFile('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
 $this->beginPage();
 ?>
 <!DOCTYPE html>
@@ -109,20 +105,19 @@ $this->beginPage();
         </div>
     </main>
 
-    <?php $this->endBody(); ?>
+    <div id="modal-form-ajax" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"></div>
+        </div>
+    </div>
 
-    <?php
-    if (Yii::$app->session->hasFlash('success')) {
-        $this->registerJs("
-            Swal.fire({
-                title: 'Success!',
-                text: '" . Yii::$app->session->getFlash('success') . "',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        ");
-    }
-    ?>
+    <?= Html::script(
+        \yii\helpers\Json::encode((object) Yii::$app->session->getAllFlashes(true)),
+        ['id' => 'sessionFlashes', 'type' => 'application/json']
+    ) ?>
+
+
+    <?php $this->endBody(); ?>
 </body>
 
 </html>

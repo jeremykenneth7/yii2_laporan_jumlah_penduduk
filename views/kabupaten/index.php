@@ -84,5 +84,3 @@ $this->params['breadcrumbs'][] = 'Data Kabupaten';
 </div>
 
 <?php \yii\widgets\Pjax::end() ?>
-
-<?= $this->render('../layouts/modal.php') ?>
