@@ -45,50 +45,29 @@ $this->title = $this->params['pageName'] = "Laporan Jumlah Penduduk";
         </div>
     </div>
 
-    <div class="body-content">
-
-        <!-- Carousel Start -->
-        <div id="dataCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner mt-5">
-                <?php foreach ($carouselItems as $index => $items) : ?>
-                    <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                        <div class="row">
-                            <?php foreach ($items as $provinsi) : ?>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card h-100 shadow">
-                                        <div class="card-body text-center">
-                                            <i class="fas fa-map-marked-alt fa-3x mb-4 text-primary"></i>
-                                            <h5 class="card-title"><?= htmlspecialchars($provinsi->nama_provinsi) ?></h5>
-                                            <p class="card-text">Jumlah Penduduk: <?= count($provinsi->penduduk) ?></p>
-                                            <a class="btn btn-outline-primary" href="<?= Url::to(['/laporan2', 'search' => $provinsi->nama_provinsi]) ?>">Lihat Detail &raquo;</a>
-                                        </div>
+    <!-- Carousel Start -->
+    <div id="dataCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner mt-5">
+            <?php foreach ($carouselItems as $index => $items) : ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                    <div class="row">
+                        <?php foreach ($items as $provinsi) : ?>
+                            <div class="col-lg-4 mb-4">
+                                <div class="card h-100 shadow">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-map-marked-alt fa-3x mb-4 text-primary"></i>
+                                        <h5 class="card-title"><?= htmlspecialchars($provinsi->nama_provinsi) ?></h5>
+                                        <p class="card-text">Jumlah Penduduk: <?= count($provinsi->penduduk) ?></p>
+                                        <a class="btn btn-outline-primary" href="<?= Url::to(['/laporan2', 'search' => $provinsi->nama_provinsi]) ?>">Lihat Detail &raquo;</a>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
-                        </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-
-        <!-- Kontrol di Carrousel -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#dataCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#dataCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
-    <!-- Carousel End -->
-
-    <!-- Pagination Indicators -->
-    <ol class="carousel-indicators">
-        <?php foreach ($carouselItems as $index => $items) : ?>
-            <li data-bs-target="#dataCarousel" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>"></li>
-        <?php endforeach; ?>
-    </ol>
 
     <div class="row text-center mt-4">
         <div class="col-md-6 mb-4">
