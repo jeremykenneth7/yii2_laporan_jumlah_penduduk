@@ -29,10 +29,10 @@ class Provinsi extends \jeemce\models\Model
     public function rules()
     {
         return [
-            [['nama_provinsi'], 'required', 'message' => 'Nama Provinsi tidak boleh kosong.'],
+            [['nama_provinsi'], 'required'],
             [['id_provinsi'], 'string', 'max' => 3],
             [['nama_provinsi'], 'string', 'max' => 256],
-            [['id_provinsi', 'nama_provinsi'], 'unique', 'message' => 'Nama Provinsi "{value}" sudah ada.'],
+            [['id_provinsi', 'nama_provinsi'], 'unique'],
         ];
     }
 
