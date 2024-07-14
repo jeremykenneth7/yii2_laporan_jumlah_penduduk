@@ -120,7 +120,7 @@ class Laporan2Controller extends Controller
 
         $ymin = 5;
         $xmin = 'A';
-        $xmax = 'D';
+        $xmax = 'C';
 
         \app\extras\ExcelHelper::sheetAlter($worksheet, $alters, 1, $ymin, $xmin, $xmax);
 
@@ -141,6 +141,16 @@ class Laporan2Controller extends Controller
             $nomor++;
             $y++;
         }
+
+        $worksheet->getStyle("$xmin$ymin:$xmax" . ($y - 1))->applyFromArray([
+            'borders' => ['allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]],
+        ]);
+        $worksheet->getStyle("$xmin$y:$xmax$y")->applyFromArray([
+            'fill' => $style['fill'],
+            'font' => $style['font'],
+        ]);
+
+        $y++;
 
         \app\extras\ExcelHelper::writerResult($spreadsheet, 'data_provinsi.xlsx');
     }
