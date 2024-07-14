@@ -38,7 +38,8 @@ class Penduduk extends \jeemce\models\Model
         return [
             [['nama', 'nik', 'jenis_kelamin', 'tanggal_lahir', 'alamat', 'id_provinsi', 'id_kabupaten'], 'required'],
             [['nama'], 'string', 'max' => 100],
-            [['nik'], 'number', 'max' => 18],
+            [['nik'], 'string', 'max' => 18],
+            [['nik'], 'number'],
             [['jenis_kelamin'], 'in', 'range' => ['Laki-laki', 'Perempuan']],
             [['tanggal_lahir'], 'date', 'format' => 'php:Y-m-d'],
             [['alamat'], 'string'],
